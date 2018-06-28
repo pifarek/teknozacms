@@ -75,15 +75,15 @@ exec("chmod -R 777 public/upload");
 exec("php artisan cache:clear");
 exec("php artisan view:clear");
 
+echo "---- Genereting app key ----\r\n";
+
+exec("php artisan key:generate");
+
 echo "---- Updating environment ----\r\n";
 
 exec("composer dump-autoload");
 exec("composer install");
 exec("npm update");
-
-echo "---- Genereting app key ----\r\n"; 
-
-exec("php artisan key:generate");
 
 echo "---- Seeding Database ----\r\n";
 
