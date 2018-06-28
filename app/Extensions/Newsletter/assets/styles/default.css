@@ -1,0 +1,98 @@
+/* Page Newsletter Send */
+#page-newsletter-send label{
+    line-height: 24px;
+}
+
+/* Page Newsletter Send Greetings */
+#page-newsletter-send-greetings label{
+    line-height: 24px;
+}
+#page-newsletter-send-greetings .users-list{
+    display: none;
+    padding: 0 20px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid #dcdcdc;
+}
+#page-newsletter-send-greetings .groups-list{
+    display: none;
+    padding: 0 20px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid #dcdcdc;
+}
+
+/* Page Newsletter Send Empty */
+#page-newsletter-send-empty label{
+    line-height: 24px;
+}
+#page-newsletter-send-empty .users-list{
+    display: none;
+    padding: 0 20px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid #dcdcdc;
+}
+#page-newsletter-send-empty .groups-list{
+    display: none;
+    padding: 0 20px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid #dcdcdc;
+}
+
+/* Page Newsletter Send Content */
+#page-newsletter-send-content ul.elements{
+    list-style: none;
+    padding: 0 5px;
+    margin: 0;
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#page-newsletter-send-content ul.elements li{
+    display: block;
+    padding: 5px;
+    margin-bottom: 10px;
+    cursor: move;
+    background: #f9f9f9;
+}
+#page-newsletter-send-content ul.elements li:nth-child(odd){
+    background: #efefef;
+}
+#page-newsletter-send-content ul.elements li:last-child{
+    margin-bottom: 0;
+}
+#page-newsletter-send-content ul.elements h4{
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #626262;
+}
+#page-newsletter-send-content ul.elements p{
+    margin: 0;
+    font-size: 11px;
+    color: #9d9d9d;
+}
+#page-newsletter-send-content li.news-element{
+    border-left: 2px solid #b2cbff;
+}
+#page-newsletter-send-content li.event-element{
+    border-left: 2px solid #99e08b;
+}
+#page-newsletter-send-content .drag-info{
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    right: 100px;
+    transform: translate(0, -50%);
+    text-align: center;
+}
+#page-newsletter-send-content .search-elements{
+    padding-top: 7px;
+}
+#page-newsletter-send-content .search-elements input{
+    padding: 0 5px;
+    background: #f5f5f5;
+    box-shadow: none;
+}

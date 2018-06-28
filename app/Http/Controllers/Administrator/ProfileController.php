@@ -1,0 +1,95 @@
+<?php
+namespace App\Http\Controllers\Administrator;
+
+use Illuminate\Http\Request;
+
+class ProfileController extends BaseController
+{
+    
+    /*
+     * Edit currently logged user profile
+     */
+    public function getIndex()
+    {
+        return view('administrator.profile')->with([
+            'user' => \Auth::user()
+        ]);
+    }
+    
+    public function postIndex()
+    {
+        $rules = [
+            'image' => ['max:10000', 'image'],
+            'name' => [],
+            'surname' => [],
+        ];
+        
+        if(\Input::get('password')) {
+            $rules['password'] = ['min:6'];
+            $rules['repassword'] = ['min:6', 'same:password'];
+        }
+        
+        $validation = \Validator::make(\Input::all(), $rules);
+        
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation->errors())->withInput();
+        }
+        
+        $user = \Auth::user();
+        
+
+        
+        $user->name = \Input::get('name');
+        $user->surname = \Input::get('surname');
+        if(\Input::get('password')){
+            $user->password = bcrypt(\Input::get('password'));
+        }
+        $user->save();
+        
+        return redirect('administrator/profile')->with('success', trans('admin.profile_msg_updated'));
+    }
+
+    /**
+     * Remove logged user avatar
+     * @return type
+     */
+    public function avatarRemove()
+    {
+        $user = \Auth::user();
+        if($user->avatar){
+            @unlink('upload/users/' . $user->avatar);
+            $user->avatar = '';
+            $user->save();
+        }
+        return response()->json(['status' => 'ok']);
+    }
+
+    /**
+     * Upload logged user avatar
+     * @param Request $request
+     */
+    public function avatar(Request $request)
+    {
+        $avatar = $request->file('avatar');
+
+        $rules = [
+            'image' => ['max:10000', 'image']
+        ];
+
+        $validation = \Validator::make(\Input::all(), $rules);
+
+        if($validation->passes()) {
+            if($avatar) {
+                $user = \Auth::user();
+                $filename = uniqid(null, true) . '.jpg';
+                \Image::make($avatar->getRealPath())->fit(300, 300)->save('upload/users/' . $filename);
+                $user->avatar = $filename;
+                $user->save();
+
+                return response()->json(['status' => 'ok', 'filename' => $filename]);
+            }
+        }
+
+        return response()->json(['status' => 'err']);
+    }
+}

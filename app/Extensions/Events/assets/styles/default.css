@@ -1,0 +1,19 @@
+/* Page Event Edit */
+#page-events-edit .image{
+    position: relative;
+    min-height: 50px;
+}
+#page-events-edit .image .controls{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+#page-events-edit .image img{
+    max-width: 100%;
+}
+#page-events-edit label{
+    line-height: 24px;
+}
+#page-events-edit .form-group {
+    position: relative;
+}

@@ -1,0 +1,44 @@
+/* Page Project Edit */
+#page-project-edit .image{
+    position: relative;
+    min-height: 50px;
+}
+#page-project-edit .image .controls{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+#page-project-edit .image img{
+    width: 100%;
+}
+#page-project-edit .project-images{
+    padding-top: 20px;
+}
+#page-project-edit .project-image{
+    display: block;
+    position: relative;
+    float: left;
+    width: 200px;
+    height: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #979797;
+}
+#page-project-edit .project-image:hover > .remove{
+    display: block;
+}
+#page-project-edit .project-image .remove{
+    display: none;
+    position: absolute;
+    padding: 2px 4px;
+    top: 5px;
+    right: 5px;
+    font-size: 25px;
+    color: red;
+    background: #fff;
+    line-height: 0;
+}
+#page-project-edit .project-image img{
+    width: 100%;
+}

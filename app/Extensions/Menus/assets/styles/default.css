@@ -1,0 +1,23 @@
+/* Page Menus Item Edit */
+#page-menus-item-edit .intro-image{
+    position: relative;
+}
+#page-menus-item-edit .intro-image img{
+    max-width: 100%;
+}
+#page-menus-item-edit .intro-image button{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+#page-menus-item-edit .intro-video{
+    position: relative;
+}
+#page-menus-item-edit .intro-video img{
+    width: 100%;
+}
+#page-menus-item-edit .intro-video button{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}

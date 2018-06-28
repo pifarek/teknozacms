@@ -1,0 +1,10 @@
+/nbproject
+/.idea
+.env
+/vendor
+/storage/logs/*
+/storage/framework/views/*
+/storage/framework/sessions/*
+/storage/framework/cache/*
+/bootstrap/cache/*
+/node_modules

@@ -1,0 +1,8 @@
+- db migrations
+- db seed
+- js translations
+- multimedia video load rule
+- replace bootstrap select with npm
+- token expired error
+- custom error messages
+- multimedia (not only) tabs inside modals

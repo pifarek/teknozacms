@@ -1,0 +1,20 @@
+/* Page News */
+#page-news thead th:first-child {
+    width: 150px;
+}
+#page-news tbody td:first-child img {
+    width: 100%;
+}
+/* Page News Edit */
+#page-news-edit textarea {
+    height: 700px;
+}
+#page-news-edit .news-image {
+    text-align: center;
+}
+#page-news-edit .news-image .btn {
+    margin-top: 20px;
+}
+#page-news-edit .news-image img {
+    width: 100%;
+}

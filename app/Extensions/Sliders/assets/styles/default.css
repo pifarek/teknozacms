@@ -1,0 +1,32 @@
+/* Page Sliders */
+#page-sliders .card-title  {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 20px;
+}
+/* Page Slide Add */
+#page-sliders-slide-add .slide-preview {
+    max-width: 100%;
+}
+#page-sliders-slide-add .slide-preview img {
+    width: 100%;
+}
+#page-sliders-slide-add .slide-preview .pr-bar {
+    margin-top: 20px;
+}
+#page-sliders-slide-add input[type="checkbox"] {
+    margin-left: 0px;
+}
+/* Page Slide Edit */
+#page-sliders-slide-edit .slide-preview {
+    max-width: 100%;
+}
+#page-sliders-slide-edit .slide-preview img {
+    width: 100%;
+}
+#page-sliders-slide-edit .slide-preview .pr-bar {
+    margin-top: 20px;
+}
+#page-sliders-slide-edit input[type="checkbox"] {
+    margin-left: 0px;
+}

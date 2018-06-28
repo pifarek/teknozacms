@@ -1,0 +1,48 @@
+/* Page Multimedia */
+#page-multimedia .card-image{
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+#page-multimedia .card-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+#page-multimedia .type-icon{
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    padding: 0px 10px;
+    background: #fff;
+    font-size: 20px;
+}
+#page-multimedia .card-content p{
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#page-multimedia .card-title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 4px 7px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#page-multimedia .image-preview{
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+#page-multimedia .image-preview img{
+    width: 100%;
+}

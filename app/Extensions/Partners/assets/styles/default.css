@@ -1,0 +1,8 @@
+/* Page Partners */
+#page-partners .partner-logo{
+    height: 50px;
+    overflow: hidden;
+}
+#page-partners .partner-logo img{
+    height: 100%;
+}
