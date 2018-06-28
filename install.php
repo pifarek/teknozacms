@@ -77,6 +77,7 @@ exec("php artisan view:clear");
 
 echo "---- Updating environment ----\r\n";
 
+exec("composer dump-autoload");
 exec("composer install");
 exec("npm update");
 
