@@ -77,7 +77,7 @@ exec("php artisan view:clear");
 
 echo "---- Updating environment ----\r\n";
 
-exec("composer update");
+exec("composer install");
 exec("npm update");
 
 echo "---- Genereting app key ----\r\n"; 
