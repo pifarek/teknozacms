@@ -73,21 +73,21 @@ exec("chmod -R 777 bootstrap");
 exec("chmod -R 777 public/upload");
 exec("chmod -R 777 public/assets");
 
-//exec("php artisan cache:clear");
-//exec("php artisan view:clear");
-
-echo "---- Genereting app key ----\r\n";
-
-exec("php artisan key:generate");
-
 echo "---- Updating environment ----\r\n";
 
 exec("composer dump-autoload");
 exec("composer install");
 exec("npm update");
 
+echo "---- Genereting app key ----\r\n";
+
+exec("php artisan key:generate");
+
 echo "---- Seeding Database ----\r\n";
 
 exec("php artisan migrate:refresh --seed");
+
+exec("php artisan cache:clear");
+exec("php artisan view:clear");
 
 echo "---- Teknoza CMS installed successfully! ----\r\n";
