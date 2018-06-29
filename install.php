@@ -72,10 +72,9 @@ exec("chmod -R 777 storage");
 exec("chmod -R 777 bootstrap");
 exec("chmod -R 777 public/upload");
 exec("chmod -R 777 public/assets");
-exec("chmod -R 777 public/node_modules");
 
-exec("php artisan cache:clear");
-exec("php artisan view:clear");
+//exec("php artisan cache:clear");
+//exec("php artisan view:clear");
 
 echo "---- Genereting app key ----\r\n";
 
