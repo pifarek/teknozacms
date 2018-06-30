@@ -19,7 +19,7 @@ class Cmssettings extends Migration
             $table->increments('id');
             $table->integer('locale_id')->unsigned()->nullable();
             $table->text('name');
-            $table->text('value');
+            $table->text('value')->nullable();
         });
     }
 

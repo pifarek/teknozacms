@@ -6,7 +6,7 @@ $(document).ready(function(){
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected contact?",
+                text: contactTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

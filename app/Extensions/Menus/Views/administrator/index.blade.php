@@ -46,10 +46,16 @@
                 </table>
             </div>
             @else
-            <div class="alert alert-info">No menus were found.</div>
+            <div class="alert alert-info">{{ __('menus::admin.menus_index_empty') }}</div>
             @endif
             
         </section>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        var MenusTranslations = {'js_menus_remove': '{{ __('menus::admin.js_menus_remove') }}'};
+    </script>
 @endsection

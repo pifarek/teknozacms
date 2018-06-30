@@ -14,7 +14,7 @@
     "exports-loader": "^0.7.0",
     "expose-loader": "^0.7.5",
     "imports-loader": "^0.8.0",
-    "laravel-mix": "^2.1.9",
+    "laravel-mix": "^2.0",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.4",
@@ -23,14 +23,21 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^1.0.0-alpha.2",
     "@fancyapps/fancybox": "^3.2.5",
+    "@fortawesome/fontawesome-free": "^5.1.0",
+    "blueimp-file-upload": "^9.22.0",
     "bootbox": "^4.4.0",
     "bootstrap": "^4.1.1",
+    "bootstrap-select": "^1.13.1",
     "bootstrap-sweetalert": "^1.0.1",
     "cross-env": "^5.2.0",
     "jquery": "^3.3.1",
-    "laravel-mix": "^2.0",
+    "jquery-datetimepicker": "^2.5.20",
+    "jquery-ui-sortable-npm": "^1.0.0",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
     "morris-js-module": "^1.2.1",
     "popper.js": "^1.12.9",
-    "raphael": "^2.2.7"
+    "raphael": "^2.2.7",
+    "tinymce": "^4.7.13"
   }
 }

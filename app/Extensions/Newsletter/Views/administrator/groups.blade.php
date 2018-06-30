@@ -48,3 +48,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var NewsletterTranslations = {'js_group_remove': '{{ __('newsletter::admin.js_group_remove') }}'};
+    </script>
+@endsection

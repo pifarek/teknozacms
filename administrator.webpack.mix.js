@@ -70,9 +70,9 @@ mix.styles([
     'node_modules/bootstrap/dist/css/bootstrap.css',
     'resources/assets/administrator/css/lumen_bootstrap.min.css',
     'node_modules/bootstrap-sweetalert/dist/sweetalert.css',
-    'resources/assets/administrator/vendor/fontawesome/css/fontawesome-all.css',
+    'node_modules/@fortawesome/fontawesome-free/css/all.css',
     'node_modules/blueimp-file-upload/css/jquery.fileupload.css',
-    'resources/assets/administrator/vendor/bootstrap-select-1.13.0-beta/css/bootstrap-select.min.css',
+    'node_modules/bootstrap-select/dist/css/bootstrap-select.css',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css',
     'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css',
     'node_modules/morris-js-module/morris.css',
@@ -89,7 +89,7 @@ mix.js([
     'node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
     'node_modules/blueimp-file-upload/js/jquery.iframe-transport.js',
     'node_modules/blueimp-file-upload/js/jquery.fileupload.js',
-    'resources/assets/administrator/vendor/bootstrap-select-1.13.0-beta/js/bootstrap-select.min.js',
+    'node_modules/bootstrap-select/dist/js/bootstrap-select.js',
     'node_modules/tinymce/tinymce.js',
     'node_modules/moment-timezone/builds/moment-timezone.min.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
@@ -102,3 +102,6 @@ mix.js([
 
 // Copy TinyMCE skins
 mix.copyDirectory('node_modules/tinymce/skins', 'public/assets/administrator/js/skins');
+
+// Copy FontAwesome fonts
+mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/assets/administrator/webfonts');

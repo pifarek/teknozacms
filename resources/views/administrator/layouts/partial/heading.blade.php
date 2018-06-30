@@ -16,7 +16,7 @@
         @if(isset($buttons) && $buttons->count())
         <div class="navbar-buttons">
             @foreach($buttons as $button)
-            <a href="{{ isset($button['url']) ? $button['url'] : '#' }}" class="btn btn-primary"{!! isset($button['modal']) ? 'data-toggle="modal" data-target="#' . $button['modal'] . '"' : '' !!}>
+            <a href="{{ isset($button['url']) ? $button['url'] : '#' }}" class="btn btn-primary"{!! isset($button['modal']) ? ' data-toggle="modal" data-target="#' . $button['modal'] . '"' : '' !!}>
                 @if(isset($button['icon']))
                 <i class="fa fa-{{ $button['icon'] }}"></i>
                 @endif

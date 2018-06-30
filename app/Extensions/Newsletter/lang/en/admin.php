@@ -113,4 +113,8 @@ return [
     'msg_group_added' => 'New newsletter group has been added successfully.',
     'msg_group_updated' => 'Selected newsletter group has been updated successfully.',
     'msg_template_added' => 'New newsletter template has been added successfully.',
+
+    /* Newsletter/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected email?',
+    'js_group_remove' => 'Are you sure you want to remove selected group?',
 ];

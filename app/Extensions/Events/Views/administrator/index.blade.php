@@ -68,3 +68,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var EventsTranslations = {'js_remove': '{{ __('events::admin.js_remove') }}'};
+    </script>
+@endsection

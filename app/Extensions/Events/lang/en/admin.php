@@ -59,4 +59,7 @@ return [
     'msg_added' => 'New event has been added successfully.',
     'msg_updated' => 'Selected event has been updated successfully.',
     'msg_removed' => 'Selected event has been succesfully removed.',
+
+    /* Events/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected event?',
 ];

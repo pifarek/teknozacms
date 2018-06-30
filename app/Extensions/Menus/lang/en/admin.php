@@ -35,6 +35,7 @@ return [
     'menus_index_code' => 'Shortcode',
     'menus_index_actions' => 'Actions',
     'menus_index_items' => 'Items',
+    'menus_index_empty' => 'No defined menus were found.',
 
     /* Menus/Item-Add */
     'menus_item_add_menus' => 'Menus',
@@ -90,4 +91,8 @@ return [
     /* Menus/Messages */
     'menus_msg_removed' => 'Selected menu has been removed.',
     'menus_item_msg_removed' => 'Selected item has been removed.',
+
+    /* Menus/Javascript */
+    'js_menus_remove' => 'Are you sure you want to remove selected menu?',
+    'js_items_remove' => 'Are you sure you want to remove selected menu item?',
 ];

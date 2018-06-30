@@ -118,7 +118,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected slider?",
+                text: SlidersTranslations.js_slider_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -141,7 +141,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected slide?",
+                text: SlidersTranslations.js_slide_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

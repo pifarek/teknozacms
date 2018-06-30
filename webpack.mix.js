@@ -1,3 +1,6 @@
+const { mix } = require('laravel-mix');
+const webpack = require('webpack');
+
 /*
     Teknoza CMS
     If you want to use Webpack - edit page.webpack.mix.js for front-end

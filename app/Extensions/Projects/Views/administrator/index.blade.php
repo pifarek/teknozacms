@@ -56,3 +56,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var ProjectsTranslations = {'js_remove': '{{ __('projects::admin.js_remove') }}'};
+    </script>
+@endsection

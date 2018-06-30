@@ -30,7 +30,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected partner?",
+                text: PartnersTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

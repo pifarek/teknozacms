@@ -69,3 +69,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var PartnersTranslations = {'js_remove': '{{ __('partners::admin.js_remove') }}'};
+    </script>
+@endsection

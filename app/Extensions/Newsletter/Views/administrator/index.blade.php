@@ -62,3 +62,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var NewsletterTranslations = {'js_remove': '{{ __('newsletter::admin.js_remove') }}'};
+    </script>
+@endsection

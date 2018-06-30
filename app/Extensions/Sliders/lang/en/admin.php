@@ -84,4 +84,8 @@ return [
     'slide_msg_removed' => 'A selected slide has been successfully removed.',
     'slide_msg_added' => 'Your new slide has been added successfully.',
     'slide_msg_updated' => 'Selected slide has been successfully updated.',
+
+    /* Sliders/*Javascript */
+    'js_slider_remove' => 'Are you sure you want to remove selected slider?',
+    'js_slide_remove' => 'Are you sure you want to remove selected slide?',
 ];

@@ -68,4 +68,8 @@ return [
     'msg_category_added' => 'News category has been successfully added.',
     'msg_category_updated' => 'Selected news category has been updated successfully.',
     'msg_category_removed' => 'Selected news category has been succesfully removed.',
+
+    /* News/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected news?',
+    'js_category_remove' => 'Are you sure you want to remove selected category?',
 ];

@@ -48,3 +48,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var ProjectsTranslations = {'js_tag_remove': '{{ __('projects::admin.js_tag_remove') }}'};
+    </script>
+@endsection

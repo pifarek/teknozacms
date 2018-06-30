@@ -288,3 +288,14 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var MultimediaTranslations = {
+            'js_added': '{{ __('multimedia::admin.js_added') }}',
+            'js_album_added': '{{ __('multimedia::admin.js_album_added') }}',
+            'js_remove': '{{ __('multimedia::admin.js_remove') }}',
+            'js_album_remove': '{{ __('multimedia::admin.js_album_remove') }}',
+        };
+    </script>
+@endsection

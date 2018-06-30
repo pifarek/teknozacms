@@ -49,3 +49,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var contactTranslations = {'js_remove': '{{ __('contacts::admin.js_remove') }}'};
+    </script>
+@endsection

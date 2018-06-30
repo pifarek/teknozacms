@@ -79,3 +79,12 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var SlidersTranslations = {
+            'js_slider_remove': '{{ __('sliders::admin.js_slider_remove') }}',
+            'js_slide_remove': '{{ __('sliders::admin.js_slide_remove') }}',
+        };
+    </script>
+@endsection

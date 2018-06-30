@@ -58,4 +58,9 @@ return [
     'projects_msg_tag_added' => 'A new project tag has been added successfully.',
     'projects_msg_tag_updated' => 'Selected project tag has been updated successfully.',
     'projects_msg_tag_removed' => 'Selected project tag has been removed.',
+
+    /* Projects/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected project?',
+    'js_image_remove' => 'Are you sure you want to remove image?',
+    'js_tag_remove' => 'Are you sure you want to remove selected tag?',
 ];

@@ -6,7 +6,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected project?",
+                text: ProjectsTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -65,7 +65,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove image?",
+                text: ProjectsTranslations.js_image_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -91,7 +91,7 @@
 
         swal({
                 title: "",
-                text: "'Are you sure you want to remove selected tag?",
+                text: ProjectsTranslations.js_tag_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

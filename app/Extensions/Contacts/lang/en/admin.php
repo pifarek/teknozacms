@@ -48,5 +48,8 @@ return [
     /* Contacts/Messages */
     'msg_removed' => 'Selected contact has been removed.',
     'msg_added' => 'New contact has been added successfully.',
-    'msg_update' => 'Contact has been updated successfully.'
+    'msg_update' => 'Contact has been updated successfully.',
+
+    /* Contacts/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected contact?',
 ];

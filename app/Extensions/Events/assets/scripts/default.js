@@ -38,7 +38,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected event?",
+                text: EventsTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

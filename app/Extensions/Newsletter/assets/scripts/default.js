@@ -6,7 +6,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected email?",
+                text: NewsletterTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -32,7 +32,7 @@
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected group?",
+                text: NewsletterTranslations.js_group_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

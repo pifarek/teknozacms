@@ -33,4 +33,7 @@ return [
     'partners_msg_added' => 'A new partner has been added successfully.',
     'partners_msg_updated' => 'Partner has been updated successfully.',
     'partners_msg_removed' => 'Partner has been successfully removed.',
+
+    /* Partners/Javascript */
+    'js_remove' => 'Are you sure you want to remove selected partner?',
 ];

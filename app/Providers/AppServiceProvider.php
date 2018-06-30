@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,24 @@ class AppServiceProvider extends ServiceProvider
 
         // Default length of mysql key names
         Schema::defaultStringLength(191);
+
+        // Validate Video URL
+        Validator::extend('video', function($attribute, $value, $parameters){
+            $patterns = array(
+                array(
+                    'pattern' => '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i',
+                    'type' => 'youtube'
+                )
+            );
+
+            foreach($patterns as $pattern){
+                preg_match_all($pattern["pattern"], $value, $matches);
+                if(!empty($matches[1])){
+                    return true;
+                }
+            }
+            return false;
+        });
 
         // Set the page language
         /**

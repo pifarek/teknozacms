@@ -107,3 +107,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var ProjectsTranslations = {'js_image_remove': '{{ __('projects::admin.js_image_remove') }}'};
+    </script>
+@endsection

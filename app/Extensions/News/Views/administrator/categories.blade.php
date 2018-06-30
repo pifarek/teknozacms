@@ -54,3 +54,9 @@
     
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        var MenusTranslations = {'js_category_remove': '{{ __('menus::admin.js_category_remove') }}'};
+    </script>
+@endsection

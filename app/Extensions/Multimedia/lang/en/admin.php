@@ -27,4 +27,10 @@ return [
     'manage_parent' => 'Album Parent',
     'manage_form_error' => 'Please fill all required fields correctly.',
     'manage_form_empty' => 'We don\'t have any multimedia objects.',
+
+    /* Multimedia/Javascript */
+    'js_added' => 'A new multimedia item has been created successfully.',
+    'js_album_added' => 'A new album has been created successfully.',
+    'js_remove' => 'Are you sure you want to remove selected item?',
+    'js_album_remove' => 'Are you sure you want to remove selected album?',
 ];

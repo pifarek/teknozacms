@@ -5,7 +5,7 @@
         var category_id = $(this).attr('data-id');
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected category?",
+                text: NewsTranslations.js_categories_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -73,7 +73,7 @@
         var news_id = $(this).attr('data-id');
         swal({
                 title: '',
-                text: "Are you sure you want to remove selected news?",
+                text: NewsTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

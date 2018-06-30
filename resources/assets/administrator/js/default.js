@@ -241,7 +241,7 @@ tinymce.init({
 
     // Active all tabs
     $('.nav-tabs').not('.not-active').each(function(){
-        $(this).children('li:visible:first').children('a').trigger('click');
+        $(this).children('li:not(.d-none):first').children('a:not(.active)').trigger('click');
     });
 
     // Enable tooltips

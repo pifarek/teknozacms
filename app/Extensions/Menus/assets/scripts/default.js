@@ -79,7 +79,7 @@ $(document).ready(function(){
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected menu item?",
+                text: MenusTranslations.js_items_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -105,7 +105,7 @@ $(document).ready(function() {
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected menu?",
+                text: MenusTranslations.js_menus_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",

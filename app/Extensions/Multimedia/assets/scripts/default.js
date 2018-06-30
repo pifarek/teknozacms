@@ -63,6 +63,7 @@ $(document).ready(function(){
         $('#multimedia-add-modal .has-error').removeClass('has-error');
 
         $('#multimedia-add-modal input[type="text"]').val('');
+        $('#multimedia-add-modal textarea').val('');
         $('#multimedia-add-modal input[name="image-filename"]').val('');
 
         $('#multimedia-add-modal .image-preview').html('').addClass('d-none');
@@ -135,7 +136,7 @@ $(document).ready(function(){
                         scrollTop: $('#item-' + response.item_id).offset().top
                     }, 2000);
                 }else{
-                    swal('A new multimedia item has been created successfully.');
+                    swal(MultimediaTranslations.js_added);
                 }
 
                 $('#multimedia-add-modal').modal('hide');
@@ -167,7 +168,7 @@ $(document).ready(function(){
                 if(current_album_id == selected_album_id){
                     $('#page-multimedia .albums-list').append(response.view);
                 }else{
-                    swal('A new album has been created successfully.');
+                    swal(MultimediaTranslations.js_album_added);
                 }
 
                 $('#multimedia-album-add-modal').modal('hide');
@@ -300,7 +301,7 @@ $(document).ready(function(){
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected item?",
+                text: MultimediaTranslations.js_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
@@ -327,7 +328,7 @@ $(document).ready(function(){
 
         swal({
                 title: "",
-                text: "Are you sure you want to remove selected album?",
+                text: MultimediaTranslations.js_album_remove,
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes, remove",
