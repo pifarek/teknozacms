@@ -21,3 +21,8 @@
 7. npm update
 8. php artisan key:generate
 9. run php artisan migrate --seed
+
+### 4. Credentials
+
+user: admin@teknoza.be
+password: administrator
