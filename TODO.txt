@@ -1,3 +1,2 @@
-- js translations
 - token expired error
 - custom error messages
