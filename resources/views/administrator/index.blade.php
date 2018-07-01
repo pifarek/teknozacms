@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if($displayStatistics2)
+    @if($displayStatistics)
     <script>
         var jsonLastDay = {!! $jsonLastDay !!};
         var jsonLastMonth = {!! $jsonLastMonth !!};
