@@ -12,8 +12,12 @@
 
 ### 3. Manual Install
 
-1. git clone https://github.com/pifarek/teknozacms.git .
+1. git clone https://github.com/pifarek/teknozacms.git
 2. create database 'teknozacms'
-3. configure database inside .env file
-4. npm update
-5. run php artisan migrate --seed
+3. copy .env.example into .env file
+4. configure database inside .env file
+5. change directories permissions /storage, /bootstrap, /public/upload, /public/assets
+6. composer install
+7. npm update
+8. php artisan key:generate
+9. run php artisan migrate --seed
