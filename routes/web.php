@@ -99,12 +99,6 @@ Route::group(['middleware' => 'auth.teknoza:administrator', 'prefix' => 'adminis
 
 });
 
-// Logout selected user
-Route::get('logout', function(){
-    \Auth::logout();
-    return redirect('/');
-});
-
 /**
  * Reset user password
  */
