@@ -17,8 +17,7 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('administrator'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'front_locale' => 'en',
-            'back_locale' => 'en',
+            'locale' => 'en',
             'is_active' => 1
         ]);
     }
