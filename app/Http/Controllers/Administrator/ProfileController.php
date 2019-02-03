@@ -12,7 +12,7 @@ class ProfileController extends BaseController
     public function getIndex()
     {
         return view('administrator.profile')->with([
-            'user' => \Auth::user()
+            'user' => \Auth::guard('administrator')->user()
         ]);
     }
     
@@ -35,7 +35,7 @@ class ProfileController extends BaseController
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $user = \Auth::user();
+        $user = \Auth::guard('administrator')->user();
         
 
         
@@ -55,7 +55,7 @@ class ProfileController extends BaseController
      */
     public function avatarRemove()
     {
-        $user = \Auth::user();
+        $user = \Auth::guard('administrator')->user();
         if($user->avatar){
             @unlink('upload/users/' . $user->avatar);
             $user->avatar = '';
@@ -80,7 +80,7 @@ class ProfileController extends BaseController
 
         if($validation->passes()) {
             if($avatar) {
-                $user = \Auth::user();
+                $user = \Auth::guard('administrator')->user();
                 $filename = uniqid(null, true) . '.jpg';
                 \Image::make($avatar->getRealPath())->fit(300, 300)->save('upload/users/' . $filename);
                 $user->avatar = $filename;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Mail\newAdministratorPassword;
 use App\Mail\resetAdministratorPassword;
-use App\Models\User;
+use App\Models\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // logout just in case
-        \Auth::logout();
+        \Auth::guard('administrator')->logout();
     }
 
     /**
@@ -42,12 +42,10 @@ class AuthController extends Controller
             'email' => \Input::get('email'),
             'password' => \Input::get('password')
         ];
-        
-        $t = User::where('email', '=', \Input::get('email'))->first();
-        
+
         // Find a administrator user
-        if(User::where('email', '=', \Input::get('email'))->where('role', '=', 'administrator')->first()){
-            if(\Auth::attempt($params, (bool)\Input::get('remember'))){
+        if(Administrator::where('email', '=', \Input::get('email'))->first()){
+            if(\Auth::guard('administrator')->attempt($params, (bool)\Input::get('remember'))){
                 return redirect()->intended('administrator');
             }else{
                 return redirect()->back()->withInput();
@@ -78,7 +76,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validation->errors());
         }
         
-        $user = User::where('email', $request->get('email'))->where('role', 'administrator')->get()->first();
+        $user = Administrator::where('email', $request->get('email'))->get()->first();
 
         // Generate reset token
         $reset_token = str_random(30);
@@ -94,7 +92,7 @@ class AuthController extends Controller
 
     public function generate($token)
     {
-        $user = User::where('reset_token', $token)->where('role', 'administrator')->first();
+        $user = Administrator::where('reset_token', $token)->first();
 
         if(!$user) {
             return redirect('administrator');
@@ -120,7 +118,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        \Auth::logout();
-        return redirect('administrator');
+        \Auth::guard('administrator')->logout();
+        return redirect('administrator/auth/login');
     }
 }

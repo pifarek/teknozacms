@@ -31,19 +31,11 @@ class Authenticate{
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role = 'administrator')
+    public function handle($request, Closure $next, $guard = null)
     {
-        // If we are trying to auth administrator
-        if($role === 'administrator'){
-            if (!$request->user()){                
-                return redirect()->guest('administrator/auth/login');
-            }elseif($request->user()->role !== 'administrator'){
-                return redirect()->guest('administrator/auth/login');
-            }
-        }elseif($role === 'user'){
-            die('please finish this!');
+        if (!\Auth::guard($guard)->user()) {
+            return redirect()->guest('administrator/auth/login');
         }
-        
 
         return $next($request);
     }

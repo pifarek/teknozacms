@@ -39,7 +39,7 @@
                             <td>{!! \Date::parse($user->created_at)->format('d F Y') !!}</td>
                             <td>{!! \Date::parse($user->active_at)->format('d F Y') !!}</td>
                             <td>
-                                @if (\Auth::user()->id != $user->id)
+                                @if (\Auth::guard('administrator')->user()->id != $user->id)
                                 <div class="btn-group">
                                     <button onclick="location.href='{{ url('administrator/settings/users/edit/' . $user->id) }}'" class="btn btn-sm btn-default"><i class="fa fa-pencil-alt"></i> {{ trans('admin.edit') }}</button>
                                     <button class="btn btn-sm btn-danger" data-action="user-remove" data-id="{{ $user->id }}"><i class="fa fa-trash-alt"> </i> {{ trans('admin.remove') }}</button>

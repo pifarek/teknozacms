@@ -22,9 +22,9 @@ class BaseController extends Controller
         $this->administratorLocale = $request->cookie('administrator_locale', 'en');
         \App::setLocale($this->administratorLocale); \Date::setLocale($this->administratorLocale);
         
-        if (\Auth::user()) {
+        if (\Auth::guard('administrator')->user()) {
             // Update user last active date
-            \Auth::user()->updateActive();
+            \Auth::guard('administrator')->user()->updateActive();
         }
 
         // Share the current locale

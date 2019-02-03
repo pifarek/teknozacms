@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Administrator\Settings;
 
 use App\Http\Controllers\Administrator\BaseController;
-use App\Models\User;
+use App\Models\Administrator;
 use App\Models\Locale;
 use App\Models\Settings as SettingsModel;
-use App\Models\Settings\Email;
 
 class IndexController extends BaseController
 {
@@ -77,7 +76,7 @@ class IndexController extends BaseController
      */
     public function getUsers()
     {
-        $users = User::select(['id', 'email', 'created_at'])->where('role', '=', 'administrator')->get();
+        $users = Administrator::select(['id', 'email', 'created_at'])->get();
         $data['users'] = $users;
 
         return view('administrator.settings.users.list', $data);
@@ -97,7 +96,7 @@ class IndexController extends BaseController
     public function postUserAdd()
     {
         $rules = [
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['required', 'email', 'unique:administrators,email'],
             'password' => ['required', 'confirmed', 'min:6']
         ];
         
@@ -107,19 +106,18 @@ class IndexController extends BaseController
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
 
-        $user = new User;
+        $user = new Administrator;
         $user->email = \Input::get('email');
         $user->password = bcrypt(\Input::get('password'));
-        $user->role = 'administrator';
         $user->locale = \App::getLocale();
         $user->save();
         
-        return redirect('administrator/settings/users/edit/' . $user->id)->with('success', __trans('admin.settings_users_msg_added'));
+        return redirect('administrator/settings/users/edit/' . $user->id)->with('success', __('admin.settings_users_msg_added'));
     }
     
     public function getUserEdit($user_id)
     {
-        $user = User::find($user_id);
+        $user = Administrator::find($user_id);
         if(!$user)
         {
             return redirect()->back();
@@ -130,7 +128,7 @@ class IndexController extends BaseController
     
     public function postUserEdit($user_id)
     {
-        $user = User::find($user_id);
+        $user = Administrator::find($user_id);
         if(!$user)
         {
             return redirect()->back();
@@ -195,7 +193,7 @@ class IndexController extends BaseController
         
         $this->createTranslationsFiles($locale->language);
         
-        return redirect('administrator/settings/locales/list')->with('success', trans('admin.settings_locale_msg_added'));
+        return redirect('administrator/settings/locales/list')->with('success', __('admin.settings_locale_msg_added'));
     }
     
     /*
@@ -236,7 +234,7 @@ class IndexController extends BaseController
         $locale->language = \Input::get('language');
         $locale->save();
         
-        return redirect()->back()->with('success', trans('admin.settings_locale_msg_updated'));
+        return redirect()->back()->with('success', __('admin.settings_locale_msg_updated'));
     }
     
     private function createTranslationsFiles($language)

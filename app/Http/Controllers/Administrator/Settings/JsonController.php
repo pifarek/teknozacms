@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Administrator\Settings;
 
 use App\Http\Controllers\Administrator\BaseController;
-use App\Models\User;
+use App\Models\Administrator;
 use App\Models\Locale;
-use App\Models\Settings\Email;
 use yajra\Datatables\Facades\Datatables;
 
 class JsonController extends BaseController
@@ -17,8 +16,8 @@ class JsonController extends BaseController
     {
         // we can't remove currently logged user
         // and user that isn't administrator
-        if(\Auth::user()->id != $user_id && \Auth::user()->isAdmin()){
-            User::find($user_id)->delete();
+        if(\Auth::guard('administrator')->user()->id != $user_id && \Auth::guard('administrator')->user()->isAdmin()){
+            Administrator::find($user_id)->delete();
             
             \Session::flash('success', __('admin.settings_users_msg_removed'));
             

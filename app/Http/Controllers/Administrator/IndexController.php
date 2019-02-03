@@ -178,8 +178,8 @@ class IndexController extends BaseController
             return redirect('administrator');
         }
         
-        \Auth::user()->locale_id = $locale_id;
-        \Auth::user()->save();
+        \Auth::guard('administrator')->user()->locale_id = $locale_id;
+        \Auth::guard('administrator')->user()->save();
         
         return redirect('administrator');
     }

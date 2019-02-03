@@ -1,17 +1,6 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-/*
  * Administrator routes
  */
 Route::get('administrator/auth/login', 'App\Http\Controllers\Administrator\AuthController@form');
@@ -111,7 +100,3 @@ Route::get('locale/{id}', 'App\Http\Controllers\Page\IndexController@locale');
 //Route::controller('page/json', 'Page\JsonController');
 Route::any('/json/{param1}/{param2?}/{param3?}/{param4?}', 'App\Http\Controllers\Page\IndexController@jsonRoute');
 Route::any('/{params?}', 'App\Http\Controllers\Page\IndexController@route')->where('params','.+');
-
-//Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
