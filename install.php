@@ -68,10 +68,10 @@ file_put_contents('.env', $ENV);
 
 echo "---- Changing permissions ----\r\n";
 
-exec("@chmod -R 777 storage");
-exec("@chmod -R 777 bootstrap");
-exec("@chmod -R 777 public/upload");
-exec("@chmod -R 777 public/assets");
+exec("chmod -R 777 storage");
+exec("chmod -R 777 bootstrap");
+exec("chmod -R 777 public/upload");
+exec("chmod -R 777 public/assets");
 
 echo "---- Updating environment ----\r\n";
 
