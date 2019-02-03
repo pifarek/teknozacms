@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LocalesSeeder::class);
         $this->call(ContactsSeeder::class);
-        $this->call(UsersSeeder::class);
+        $this->call(AdministratorsSeeder::class);
         $this->call(SettingsSeeder::class);
         $this->call(NewsletterGroupsSeeder::class);
         $this->call(SliderSeeder::class);
