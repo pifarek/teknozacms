@@ -56,7 +56,7 @@
                         <li><a href="#" data-fullscreen data-toggle="tooltip" data-placement="top" title="Toggle Fullscreen"><i class="fa fa-expand-arrows-alt"></i></a></li>
                         <li><a href="{{ url('administrator/profile') }}" data-toggle="tooltip" data-placement="top" title="Your Profile"><i class="fa fa-user"></i></a></li>
                         <li><a href="{{ url('administrator/settings/global') }}" data-toggle="tooltip" data-placement="top" title="Settings"><i class="fa fa-cog"></i></a></li>
-                        <li><a href="{{ url('logout') }}" data-toggle="tooltip" data-placement="top" title="Logout"><i class="fa fa-sign-out-alt"></i></a></li>
+                        <li><a href="{{ url('administrator/auth/logout') }}" data-toggle="tooltip" data-placement="top" title="Logout"><i class="fa fa-sign-out-alt"></i></a></li>
                     </ul>
                 </div>
             </aside>
