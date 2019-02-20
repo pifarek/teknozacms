@@ -1,7 +1,7 @@
 <?php
 namespace App\Pages;
 
-use App\Models\Menus\Item;
+use App\Extensions\Menus\Models\Item;
 
 /**
  * Display Members/Board page
@@ -33,13 +33,10 @@ class Alias extends Main{
         return $page->url . $anchor;
     }
     
-    public function fields(){
-        
-        // Get the contacts
-        $items = [];
+    public function fields() {
         // Get menu items
         $items = [];
-        foreach(Item::where('id', '!=', $this->item_id)->get() as $item) {
+        foreach(Item::where('id', '!=', $this->itemId())->get() as $item) {
            $items[$item->id] = $item->name . ' [' . $item->menu->name . ']';
         }
         

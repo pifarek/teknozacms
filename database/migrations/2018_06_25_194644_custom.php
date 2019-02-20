@@ -20,7 +20,7 @@ class Custom extends Migration
             $table->integer('item_id')->unsigned();
             $table->string('locale', '2')->nullable();
             $table->text('name');
-            $table->text('value');
+            $table->text('value')->nullable();
 
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('locale')->references('language')->on('locales')->onDelete('cascade');
