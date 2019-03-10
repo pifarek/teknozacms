@@ -26,7 +26,7 @@
         </div>
         @endif
         <div class="user-avatar">
-            <img src="{{ Auth::guard('administrator')->user()->avatar? url('upload/users/' . Auth::user()->avatar) : url('assets/administrator/images/user_default.jpg') }}" alt="{{ Auth::guard('administrator')->user()->name }}">
+            <img src="{{ Auth::guard('administrator')->user()->avatar? url('upload/users/' . Auth::guard('administrator')->user()->avatar) : url('assets/administrator/images/user_default.jpg') }}" alt="{{ Auth::guard('administrator')->user()->name }}">
             <span>{{ Auth::guard('administrator')->user()->name }}</span>
         </div>
     </div>
