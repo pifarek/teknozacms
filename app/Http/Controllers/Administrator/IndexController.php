@@ -81,8 +81,8 @@ class IndexController extends BaseController
 
         $analyticsData = \Analytics::fetchTotalVisitorsAndPageViews(\Spatie\Analytics\Period::create($startTime, $endTime));
 
-        $visitors = (int) $analyticsData[0]['visitors'];
-        $pageViews = (int) $analyticsData[0]['pageViews'];
+        $visitors = (int) isset($analyticsData[0]['visitors']) ? $analyticsData[0]['visitors'] : 0;
+        $pageViews = (int) isset($analyticsData[0]['pageViews']) ? $analyticsData[0]['pageViews'] : 0;
 
         return (object) ['visitors' => $visitors, 'pageViews' => $pageViews];
     }
@@ -94,8 +94,8 @@ class IndexController extends BaseController
 
         $analyticsData = \Analytics::fetchTotalVisitorsAndPageViews(\Spatie\Analytics\Period::create($startTime, $endTime));
 
-        $visitors = (int) $analyticsData[0]['visitors'];
-        $pageViews = (int) $analyticsData[0]['pageViews'];
+        $visitors = (int) isset($analyticsData[0]['visitors']) ? $analyticsData[0]['visitors'] : 0;
+        $pageViews = (int) isset($analyticsData[0]['pageViews']) ? $analyticsData[0]['pageViews'] : 0;
 
         return (object) ['visitors' => $visitors, 'pageViews' => $pageViews];
     }
