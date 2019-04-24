@@ -1,8 +1,6 @@
 <?php
 
-/*
- * Administrator routes
- */
+// Back-End
 Route::get('administrator/auth/login', 'App\Http\Controllers\Administrator\AuthController@form');
 Route::post('administrator/auth/login', 'App\Http\Controllers\Administrator\AuthController@login');
 Route::get('administrator/auth/reset', 'App\Http\Controllers\Administrator\AuthController@resetForm');
@@ -88,15 +86,14 @@ Route::group(['middleware' => 'auth.teknoza:administrator', 'prefix' => 'adminis
 
 });
 
-/**
- * Reset user password
- */
-Route::get('reset/{token}', 'App\Http\Controllers\Page\IndexController@reset');
-/**
- * Change user locale
- */
-Route::get('locale/{id}', 'App\Http\Controllers\Page\IndexController@locale');
+// Front-End
+Route::group(['middleware' => 'locale'], function() {
+    // Reset user password
+    Route::get('reset/{token}', 'App\Http\Controllers\Page\IndexController@reset');
 
-//Route::controller('page/json', 'Page\JsonController');
-Route::any('/json/{param1}/{param2?}/{param3?}/{param4?}', 'App\Http\Controllers\Page\IndexController@jsonRoute');
-Route::any('/{params?}', 'App\Http\Controllers\Page\IndexController@route')->where('params','.+');
+    // Change user locale
+    Route::get('locale/{id}', 'App\Http\Controllers\Page\IndexController@locale');
+
+    Route::any('/json/{param1}/{param2?}/{param3?}/{param4?}', 'App\Http\Controllers\Page\IndexController@jsonRoute');
+    Route::any('/{params?}', 'App\Http\Controllers\Page\IndexController@route')->where('params', '.+');
+});

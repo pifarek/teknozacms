@@ -57,5 +57,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'auth.teknoza' => \App\Http\Middleware\Administrator\Authenticate::class,
+        'locale' => \App\Http\Middleware\Locale::class,
     ];
 }
