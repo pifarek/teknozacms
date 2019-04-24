@@ -96,7 +96,7 @@ class IndexController extends BaseController
         
         // Check if we will show categories for current user
         $show_categories = true;
-        if(\Auth::user()->group_id && \Auth::user()->group->news_category_id){
+        if(\Auth::guard('administrator')->user()->group_id && \Auth::guard('administrator')->user()->group->news_category_id){
             $show_categories = false;
         }
         
