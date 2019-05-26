@@ -38,7 +38,7 @@
                     }
             ?>
                 <tr>
-                    <td>{{ str_repeat('&mdash;', $level) }} {{ $item->name }}</td>
+                    <td>{!! str_repeat('&mdash;', $level) !!} {{ $item->name }}</td>
                     <td>{{ $item->url }}</td>
                     <td>
                         {{ $item->getType() }}
