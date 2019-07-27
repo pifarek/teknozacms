@@ -6,6 +6,7 @@ use App\Http\Controllers\Administrator\BaseController;
 use App\Models\Administrator;
 use App\Models\Locale;
 use App\Models\Settings as SettingsModel;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -247,12 +248,17 @@ class IndexController extends BaseController
             \File::put('../resources/lang/' . $language . '/' . $file, '');
         }
     }
-    
+
     /*
      * Display translations
      */
-    public function getTranslations()
+    public function getTranslations(Request $request)
     {
+        $file = null;
+        if(\Session::get('file')) {
+            $file = \Session::get('file');
+        }
+
         $files = [];
 
         $extensions = \Teknoza::Translations();
@@ -263,60 +269,31 @@ class IndexController extends BaseController
             }
         }
 
-        /**
-        $dirs = [];
-        
-        $handler = opendir('../resources/lang');
-        
-        while($file = readdir($handler))
-        {
-            if($file != '.' && $file != '..' && is_dir('../resources/lang/' . $file))
-            {
-                $dirs[] = $file;
-            }
-        }
-        
-        closedir($handler);
-        
-        foreach($dirs as $dir)
-        {
-            $handler = opendir('../resources/lang/' . $dir);
-            
-            while($file = readdir($handler))
-            {
-                if($file != '.' && $file != '..' && false !== strpos($file, '.php'))
-                {
-                    $files[$dir . '/' . $file] = $dir . '/' . $file;
-                }
-            }
-            closedir($handler);            
+        foreach(\File::allFiles('../resources/lang/') as $resourceFile) {
+            $files[$resourceFile->getRealPath()] = $resourceFile->getRelativePathname();
         }
 
-         **/
-
-        foreach(\File::allFiles('../resources/lang/') as $file) {
-            $files[$file->getRealPath()] = $file->getRelativePathname();
-        }
-        return view('administrator/settings/translations', ['files' => $files]);
+        return view('administrator/settings/translations', ['files' => $files, 'file' => $file]);
     }
-    
-    public function postTranslations(){
+
+    public function postTranslations(Request $request)
+    {
         $rules = [
             'file' => ['required'],
             'content' => ['required']
         ];
-                
-        $validation = \Validator::make(\Input::all(), $rules);
-        
+
+        $validation = \Validator::make($request->all(), $rules);
+
         if($validation->fails())
         {
             return redirect()->back();
         }
-        
-        $full_path = \Input::get('file');
-        
-        file_put_contents($full_path, \Input::get('content'));
-        
-        return redirect()->back()->with('success', 'File has been updated successfully.');
+
+        $full_path = $request->get('file');
+
+        file_put_contents($full_path, $request->get('content'));
+
+        return redirect()->back()->with('success', 'File has been updated successfully.')->with('file', $request->get('file'));
     }
 }

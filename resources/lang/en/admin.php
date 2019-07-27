@@ -94,7 +94,11 @@ return [
     /* Settings/Translations */
     'settings_translations_page_title' => 'Translations',
     'settings_translations_page_description' => 'You can edit here files with translations.',
-    'settings_translations_submit' => 'Save Settings',
+    'settings_translations_submit' => 'Save Translations',
+    'settings_translations_file_table' => 'Table Editor',
+    'settings_translations_file_file' => 'File Editor',
+    'settings_translations_file_shortcut' => 'Shortcut',
+    'settings_translations_file_translation' => 'Translation',
 
     /* Settings/Users */
     'settings_users_index_page_title' => 'Administrators List',

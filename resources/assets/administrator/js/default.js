@@ -130,18 +130,15 @@ tinymce.init({
     // Translate value
     $('#page-settings-translations').on('keyup', 'input.translation-value', function()
     {
-        var value = $(this).val().replace('\'', '\\\'');
+        var value = $(this).val().replace(/'/g, "\\'");
         var key = $(this).attr('data-key');
 
         var content = $('#translate-file').val();
 
-        var pattern = new RegExp("'" + key + "'[ ]=>[ ]'.*'", 'i');
-        if(content.search(pattern) > 0)
-        {
+        var pattern = new RegExp("'" + key + "'[ ]=>[ ]'.*'", 'gi');
+        if(content.search(pattern) > 0) {
             var content = content.replace(pattern, "'" + key + "' => '" + value + "'");
-        }
-        else
-        {
+        } else {
             alert('Sorry, we couldn\'t find selected index. Please refresh this page.');
         }
 
