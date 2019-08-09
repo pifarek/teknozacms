@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cache;
 
 class Locale extends Model
 {
@@ -20,7 +19,7 @@ class Locale extends Model
     /**
      * @param array $acceptCodes
      */
-    public function assignAccept(array $acceptCodes)
+    public function assignAccept(array $acceptCodes = [])
     {
         foreach($this->accept as $accept) {
             if(false === array_search($accept->name, $acceptCodes)) {

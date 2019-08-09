@@ -223,8 +223,8 @@ class IndexController extends BaseController
         $rules = [
             'name' => ['required'],
             'language' => ['required', 'min:2', 'max:2', 'unique:locales,language,' . $locale_id . ',id'],
-            'accept' => ['sometimes', 'array'],
-            'accept.*' => ['required']
+            'accept_code' => ['sometimes', 'array'],
+            'accept_code.*' => ['required']
         ];
         
         $validation = \Validator::make($request->all(), $rules);
@@ -234,7 +234,7 @@ class IndexController extends BaseController
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
 
-        $locale->assignAccept($request->get('accept'));
+        $locale->assignAccept($request->get('accept_code') ?? []);
 
         $locale->name = $request->get('name');
         $locale->language = $request->get('language');

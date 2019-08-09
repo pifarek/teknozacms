@@ -57,7 +57,7 @@
                         <div class="locale-accept-hidden d-none">
                             @if($locale->accept->count())
                                 @foreach($locale->accept as $accept)
-                                    <input type="hidden" name="accept[]" value="{{ $accept->name }}">
+                                    <input type="hidden" name="accept_code[]" value="{{ $accept->name }}">
                                 @endforeach
                             @endif
                         </div>

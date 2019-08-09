@@ -108,7 +108,7 @@ tinymce.init({
     });
 })(jQuery);
 
-// Page Settings Locales
+// Page Settings Locale Edit
 (function($){
     // Remove selected accept locale
     $('#page-settings-locales-edit').on('click', '[data-action="accept-remove"]', function() {
@@ -128,7 +128,7 @@ tinymce.init({
 
         if(accept && !$('.locale-accept-hidden input[value="' + accept + '"]').length) {
             $acceptInput.val('');
-            $('.locale-accept-hidden').append('<input type="hidden" name="accept[]" value="' + accept + '">');
+            $('.locale-accept-hidden').append('<input type="hidden" name="accept_code[]" value="' + accept + '">');
             $('.locale-accept').append(' <span class="badge badge-info"><span class="accept-name">' + accept + '</span><a href="#" data-action="accept-remove"><i class="fas fa-times"></i></a></span>');
         } else {
             $acceptInput.addClass('is-invalid');
