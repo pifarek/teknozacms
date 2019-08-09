@@ -215,7 +215,8 @@ class IndexController extends BaseController
         return redirect('administrator/menus/items/' . $menu_id . '/edit/' . $item->id)->with('success', trans('menus::admin.menus_item_add_success'));
     }
     
-    public function getItemEdit($menu_id, $item_id){
+    public function getItemEdit($menu_id, $item_id)
+    {
         $menu = Menu::find($menu_id);
         $item = Item::find($item_id);
         if(!$item || !$menu){

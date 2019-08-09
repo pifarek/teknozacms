@@ -15,6 +15,22 @@
             #page-content {
                 padding-top: 5%;
             }
+            #locale-switcher ul,
+            #locale-switcher li {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            #locale-switcher li {
+                display: inline-block;
+                margin: 0 4px;
+            }
+            #locale-switcher img {
+                display: block;
+                padding: 1px;
+                background: #fff;
+                border: 1px solid #dcdcdc;
+            }
         </style>
     </head>
     <body>
@@ -27,6 +43,16 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {!! Module::display('menu', ['shortcode' => 'header']) !!}
+            </div>
+
+            <div>
+                @if($locales->count() > 1)
+                    <ul id="locale-switcher">
+                        @foreach($locales as $locale)
+                            <li><a href="{{ route('locale', $locale->id) }}"><img src="{{ url('assets/page/images/flags/' . $locale->language . '.png') }}" alt=""></a></li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         </nav>
 

@@ -92,7 +92,7 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('reset/{token}', 'App\Http\Controllers\Page\IndexController@reset');
 
     // Change user locale
-    Route::get('locale/{id}', 'App\Http\Controllers\Page\IndexController@locale');
+    Route::get('locale/{id}', 'App\Http\Controllers\Page\IndexController@locale')->name('locale');
 
     Route::any('/json/{param1}/{param2?}/{param3?}/{param4?}', 'App\Http\Controllers\Page\IndexController@jsonRoute');
     Route::any('/{params?}', 'App\Http\Controllers\Page\IndexController@route')->where('params', '.+');

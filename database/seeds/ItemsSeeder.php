@@ -27,9 +27,24 @@ class ItemsSeeder extends Seeder
             'route' => 'about-us',
         ]);
 
+        DB::table('items_translations')->insert([
+            'item_id' => 1,
+            'locale' => 'pl',
+            'name' => 'O nas',
+            'url' => 'o-nas',
+            'route' => 'o-nas',
+        ]);
+
         DB::table('custom')->insert([
             'item_id' => 1,
             'locale' => 'en',
+            'name' => 'content',
+            'value' => '<p>' . $faker->paragraphs(7, true) . '</p>'
+        ]);
+
+        DB::table('custom')->insert([
+            'item_id' => 1,
+            'locale' => 'pl',
             'name' => 'content',
             'value' => '<p>' . $faker->paragraphs(7, true) . '</p>'
         ]);
@@ -46,6 +61,14 @@ class ItemsSeeder extends Seeder
             'name' => 'Contact',
             'url' => 'contact',
             'route' => 'contact',
+        ]);
+
+        DB::table('items_translations')->insert([
+            'item_id' => 2,
+            'locale' => 'pl',
+            'name' => 'Kontakt',
+            'url' => 'kontakt',
+            'route' => 'kontakt',
         ]);
 
         DB::table('custom')->insert([

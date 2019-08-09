@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Locale as LocaleModel;
+use App\Models\LocaleAccept;
 
 class Locale
 {
@@ -15,16 +17,38 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        $locale_id = $request->cookie('locale_id');
-        $locale = \App\Models\Locale::find($locale_id);
+        $cookieLocaleId = $request->cookie('locale_id');
+        $cookieLocale = LocaleModel::find($cookieLocaleId);
 
-        if($locale) {
-            // Set application locale
-            \App::setLocale($locale->language);
-            // Set also the locale for date class
-            \Date::setLocale(\App::getLocale());
+        // If we already set locale manually
+        if($cookieLocale) {
+            $this->setLocale($cookieLocale->language);
+        }
+        // We can try to detect browser locale
+        else {
+            $browserLanguages = preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'));
+
+            foreach($browserLanguages as $browserLanguage) {
+                $accept = LocaleAccept::where('name', $browserLanguage)->first();
+                if($accept) {
+                    $this->setLocale($accept->locale->language);
+                    break;
+                }
+            }
         }
 
         return $next($request);
+    }
+
+    /**
+     * Set locale for application
+     * @param $locale
+     */
+    private function setLocale($locale)
+    {
+        // Set application locale
+        \App::setLocale($locale);
+        // Set also the locale for date class
+        \Date::setLocale($locale);
     }
 }

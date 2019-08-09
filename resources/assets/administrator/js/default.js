@@ -108,6 +108,36 @@ tinymce.init({
     });
 })(jQuery);
 
+// Page Settings Locales
+(function($){
+    // Remove selected accept locale
+    $('#page-settings-locales-edit').on('click', '[data-action="accept-remove"]', function() {
+        var accept = $(this).parent().children('span.accept-name').text();
+        $(this).parent().remove();
+        $('.locale-accept-hidden input[value="' + accept + '"]').remove();
+
+        return false;
+    });
+
+    // Add selected accept locale
+    $('#page-settings-locales-edit [data-action="accept-add"]').click(function() {
+        var $acceptInput = $('input[name="accept"]');
+        var accept = $acceptInput.val().trim();
+
+        $acceptInput.removeClass('is-invalid');
+
+        if(accept && !$('.locale-accept-hidden input[value="' + accept + '"]').length) {
+            $acceptInput.val('');
+            $('.locale-accept-hidden').append('<input type="hidden" name="accept[]" value="' + accept + '">');
+            $('.locale-accept').append(' <span class="badge badge-info"><span class="accept-name">' + accept + '</span><a href="#" data-action="accept-remove"><i class="fas fa-times"></i></a></span>');
+        } else {
+            $acceptInput.addClass('is-invalid');
+        }
+
+        return false;
+    });
+})(jQuery);
+
 // Page Settings Translations
 (function($){
     // Read file to edit

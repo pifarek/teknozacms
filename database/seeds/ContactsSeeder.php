@@ -29,5 +29,12 @@ class ContactsSeeder extends Seeder
             'name' => 'Teknoza.be',
             'description' => $faker->paragraphs(3, true),
         ]);
+
+        DB::table('contacts_translations')->insert([
+            'contact_id' => $id,
+            'locale' => 'pl',
+            'name' => 'Teknoza.be',
+            'description' => $faker->paragraphs(3, true),
+        ]);
     }
 }

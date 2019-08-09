@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator\Settings;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Models\Administrator;
 use App\Models\Locale;
+use App\Models\LocaleAccept;
 use App\Models\Settings as SettingsModel;
 use Illuminate\Http\Request;
 
@@ -211,7 +212,7 @@ class IndexController extends BaseController
         return view('administrator/settings/locales/edit', ['locale' => $locale]);
     }
     
-    public function postLocaleEdit($locale_id)
+    public function postLocaleEdit(Request $request, $locale_id)
     {
         $locale = Locale::find($locale_id);
         if(!$locale)
@@ -221,18 +222,22 @@ class IndexController extends BaseController
         
         $rules = [
             'name' => ['required'],
-            'language' => ['required', 'min:2', 'max:2', 'unique:locales,language,' . $locale_id . ',id']
+            'language' => ['required', 'min:2', 'max:2', 'unique:locales,language,' . $locale_id . ',id'],
+            'accept' => ['sometimes', 'array'],
+            'accept.*' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails())
         {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
-        
-        $locale->name = \Input::get('name');
-        $locale->language = \Input::get('language');
+
+        $locale->assignAccept($request->get('accept'));
+
+        $locale->name = $request->get('name');
+        $locale->language = $request->get('language');
         $locale->save();
         
         return redirect()->back()->with('success', __('admin.settings_locale_msg_updated'));

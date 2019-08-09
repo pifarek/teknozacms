@@ -39,20 +39,6 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
-        // Set the page language
-        /**
-        if(\Cookie::get('locale')) {
-            $locale_language = json_decode(\Cookie::get('locale'))->language; 
-
-            $locale = Locale::where('language', '=', $locale_language)->get()->first();
-            if($locale) {
-                \App::setLocale($locale->language);
-                // Set also the locale for date class
-                \Date::setLocale(\App::getLocale());
-            }
-        }
-        */
-
         // Add additional translations
         foreach(\Teknoza::Translations() as $translation) {
             \Lang::addNamespace($translation['namespace'], $translation['path']);

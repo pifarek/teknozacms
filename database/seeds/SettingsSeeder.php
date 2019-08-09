@@ -18,7 +18,19 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'locale_id' => 2,
+            'name' => 'title',
+            'value' => 'Teknoza.be'
+        ]);
+
+        DB::table('settings')->insert([
             'locale_id' => 1,
+            'name' => 'description',
+            'value' => 'Teknoza.be Content Management System'
+        ]);
+
+        DB::table('settings')->insert([
+            'locale_id' => 2,
             'name' => 'description',
             'value' => 'Teknoza.be Content Management System'
         ]);

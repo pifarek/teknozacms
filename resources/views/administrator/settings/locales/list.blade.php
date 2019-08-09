@@ -24,9 +24,12 @@
             <div class="card">
                 <table class="table table-bordered table-full table-full-small">
                     <thead>
-                        <th>{{ trans('admin.settings_locales_name') }}</th>
-                        <th>{{ trans('admin.settings_locales_language') }}</th>
-                        <th>{{ trans('admin.actions') }}</th>
+                        <tr>
+                            <th>{{ trans('admin.settings_locales_name') }}</th>
+                            <th>{{ trans('admin.settings_locales_language') }}</th>
+                            <th>{{ trans('admin.settings_locales_accept') }}</th>
+                            <th>{{ trans('admin.actions') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @if($locales)
@@ -35,6 +38,13 @@
                             <td>{{ $locale->name }}</td>
                             <td>{{ $locale->language }}</td>
                             <td>
+                                @if($locale->accept->count())
+                                    @foreach($locale->accept as $accept)
+                                        <span class="badge badge-info">{{ $accept->name }}</span>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td style="width: 1%; white-space: nowrap;">
                                 <button class="btn btn-sm btn-default" type="button" onclick="location.href='{{url('administrator/settings/locales/edit/' . $locale->id)}}';"><i class="fa fa-pencil-alt"></i> {{ trans('admin.edit') }}</button>
                                 <button data-action="locale-remove" data-id="{{ $locale->id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i> {{ trans('admin.remove') }}</button>
                             </td>

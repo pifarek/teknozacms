@@ -21,7 +21,14 @@ class SlidesSeeder extends Seeder
             'slide_id' => 1,
             'locale' => 'en',
             'name' => 'TeknozaCMS slide example #1',
-            'description' => 'do we need description?',
+            'description' => 'Slider description example',
+        ]);
+
+        DB::table('slides_translations')->insert([
+            'slide_id' => 1,
+            'locale' => 'pl',
+            'name' => 'TeknozaCMS przykładowy slajd #1',
+            'description' => 'Przykładowy opis slajdu',
         ]);
 
         DB::table('slides')->insert([
@@ -35,6 +42,13 @@ class SlidesSeeder extends Seeder
             'locale' => 'en',
             'name' => 'TeknozaCMS slide example #2',
             'description' => 'do we need description?',
+        ]);
+
+        DB::table('slides_translations')->insert([
+            'slide_id' => 2,
+            'locale' => 'pl',
+            'name' => 'TeknozaCMS przykładowy slajd #2',
+            'description' => 'Przykładowy opis slajdu',
         ]);
     }
 }

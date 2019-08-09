@@ -135,12 +135,16 @@ return [
     'settings_locales_add' => 'Add Locale',
     'settings_locales_name' => 'Name',
     'settings_locales_language' => 'Language',
-    
+    'settings_locales_accept' => 'Language Accept',
+
     /* Settings/Locale-Edit */
     'settings_locale_edit_page_title' => 'Edit Locale',
     'settings_locale_edit_page_description' => 'You can edit your locale.',
     'settings_locale_edit_name' => 'Language Name',
     'settings_locale_edit_code' => 'Language Code',
+    'settings_locale_edit_accept_code' => 'Accept Code',
+    'settings_locale_edit_accept_code_add' => 'Add',
+    'settings_locale_edit_accept_info' => 'Language accept code used to detect browser language and change the default page locale.',
     'settings_locale_edit_submit' => 'Edit Locale',
     
     /* Settings/Locale-Add */

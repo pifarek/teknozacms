@@ -6,24 +6,33 @@ use Cache;
 
 class Locale extends Model
 {
+    protected $table = 'locales';
+
     /**
-     * @var array
+     * Return all accepted language codes
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $fillable = ['language'];
-
-    public static function all($columns = ['*'])
+    public function accept()
     {
-        if (!Cache::has('localesSeeder')) {
+        return $this->hasMany(LocaleAccept::class, 'locale_id', 'id');
+    }
 
-            $value = parent::orderBy('id', 'DESC')->get($columns);
+    /**
+     * @param array $acceptCodes
+     */
+    public function assignAccept(array $acceptCodes)
+    {
+        foreach($this->accept as $accept) {
+            if(false === array_search($accept->name, $acceptCodes)) {
+                $accept->delete();
+            }
+        }
 
-            Cache::put('localesSeeder', $value, 1440);
-
-            return $value;
-
-        } else {
-
-            return parent::orderBy('id', 'DESC')->get($columns);
+        foreach($acceptCodes as $accept) {
+            $check = $this->accept()->where('name', $accept)->first();
+            if(!$check) {
+                $this->accept()->create(['name' => $accept]);
+            }
         }
     }
 }

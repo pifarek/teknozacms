@@ -12,7 +12,7 @@ class IndexController extends Controller
         $page_url = $page->url();        
         
         // Get the locale id
-        $locale_id = Locale::where('language', '=', \App::getLocale())->get()->first()->id;
+        $locale_id = Locale::where('language', \App::getLocale())->first()->id;
 
         // Set the page title
         $meta_title = \Settings::get('title', $locale_id);
@@ -32,6 +32,9 @@ class IndexController extends Controller
         \View::share('page_url', $page_url);
         
         \View::share('locale_id', $locale_id);
+
+        // Available locales
+        \View::share('locales', Locale::all());
         
         return $page->logic()->with([
             'title' => $page->title(),
@@ -43,7 +46,8 @@ class IndexController extends Controller
     /*
      * Take care of AJAX request
      */
-    public function jsonRoute($page_name, $option = false, $param3 = false, $param4 = false){
+    public function jsonRoute($page_name, $option = false, $param3 = false, $param4 = false)
+    {
         $page = \App\Helpers\Page::find($page_name);
         $page->params([$option, $param3, $param4]);
         return $page->getJson($option);

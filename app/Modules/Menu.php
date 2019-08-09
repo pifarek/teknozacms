@@ -11,29 +11,35 @@ class Menu extends Module
     
     /**
      * Login of the module
-     * @return type
+     * @return array
      */
     
     public function logic()
     {
-        $items = collect();
-        
         $this->current_url = $this->params['current_url'] ?? false;
-
         $shortcode = $this->params['shortcode'];
-        
+
+        return [
+            'items' => $this->items($shortcode)
+        ];
+    }
+
+    private function items($shortcode)
+    {
+        $items = collect();
+
         if(!$shortcode) {
             // Render menu with zero items
-            return ['items' => $items];
+            return $items;
         }
-        
-        $menu = Menus::where('code', $shortcode)->get()->first();
+
+        $menu = Menus::where('code', $shortcode)->first();
 
         if(!$menu) {
             // Render menu with zero items
-            return ['items' => $items];
+            return $items;
         }
-        
+
         if(Cache::has('menu_' . $shortcode)) {
             $items = Cache::get('menu_' . $shortcode);
         } else {
@@ -43,13 +49,11 @@ class Menu extends Module
                 // Render menu with zero items
                 return ['items' => $items];
             }
-            
-            Cache::put('menu_' . $shortcode, $items);
+
+            Cache::put('menu_' . $shortcode, $items, 5);
         }
-        
-        return [
-            'items' => $items
-        ];
+
+        return $items;
     }
     
     /**

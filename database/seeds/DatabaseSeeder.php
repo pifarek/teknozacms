@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SlidesSeeder::class);
         $this->call(MenusSeeder::class);
         $this->call(ItemsSeeder::class);
+        $this->call(LocalesAcceptSeeder::class);
     }
 }

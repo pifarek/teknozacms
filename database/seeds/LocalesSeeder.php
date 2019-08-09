@@ -16,8 +16,15 @@ class LocalesSeeder extends Seeder
         DB::table('locales')->insert([
             'language' => 'en',
             'name' => 'English',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('locales')->insert([
+            'language' => 'pl',
+            'name' => 'Polski',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
