@@ -102,6 +102,7 @@ mix.js([
 
 // Copy TinyMCE skins
 mix.copyDirectory('node_modules/tinymce/skins', 'public/assets/administrator/js/skins');
+mix.copyDirectory('node_modules/tinymce/plugins', 'public/assets/administrator/js/plugins');
 
 // Copy FontAwesome fonts
 mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/assets/administrator/webfonts');

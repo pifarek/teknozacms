@@ -20,7 +20,7 @@ tinymce.init({
     theme : "modern",
     toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor | link image mybutton | fontsizeselect | fontselect ',
     selector: "textarea.tinymce",
-    plugins: "link paste autoresize",
+    plugins: "link paste autoresize code table pagebreak lists textcolor colorpicker",
     language: settings.language,
     relative_urls: false,
 });
