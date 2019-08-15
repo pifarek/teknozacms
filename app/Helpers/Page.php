@@ -158,6 +158,7 @@ class Page
                 }else{
                     $address .= '&' . $key . '=' . $value;
                 }
+                $count++;
             }
         }
         return $address;
