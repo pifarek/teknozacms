@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\User;
+use App\Models\Administrator;
 
 class resetAdministratorPassword extends Mailable
 {
@@ -20,9 +20,9 @@ class resetAdministratorPassword extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, $reset_token)
+    public function __construct(Administrator $administrator, $reset_token)
     {
-        $this->user = $user;
+        $this->user = $administrator;
         $this->reset_token = $reset_token;
     }
 
