@@ -67,7 +67,7 @@ class AuthController extends Controller
     public function reset(Request $request)
     {
         $rules = [
-            'email' => ['required', 'email', 'exists:users,email']
+            'email' => ['required', 'email', 'exists:administrators,email']
         ];
 
         $validation = \Validator::make(\Input::all(), $rules);
