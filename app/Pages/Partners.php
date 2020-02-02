@@ -1,20 +1,22 @@
 <?php
 namespace App\Pages;
 
-use App\Models\Partners\Partner as PartnerModel;
+use App\Extensions\Partners\Models\Partner as PartnerModel;
+use Illuminate\Http\Request;
 
 /**
  * Display Projects list and single Project
  */
-class Partners extends Main{    
-    public function __construct($item_id = null){
+class Partners extends Main
+{
+    public function __construct($item_id = null)
+    {
         $this->title = 'Partners';
-        
         parent::__construct($item_id);
     }   
     
-    public function logic(){
-        
+    public function logic(Request $request)
+    {
         // Get projects
         $partners = PartnerModel::all();
 

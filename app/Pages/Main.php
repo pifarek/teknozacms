@@ -2,6 +2,7 @@
 namespace App\Pages;
 
 use App\Extensions\Menus\Models\Item;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class Main extends Controller
@@ -61,7 +62,8 @@ class Main extends Controller
         }
     }
     
-    public function url($url = false){
+    public function url($url = false)
+    {
         if($url){
             $this->url = $url;
         }else{
@@ -98,7 +100,7 @@ class Main extends Controller
         return $json;
     }
     
-    public function logic() {}
+    public function logic(Request $request) {}
     
     public function fields()
     {

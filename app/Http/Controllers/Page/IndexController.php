@@ -3,10 +3,11 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function route($params = '')
+    public function route(Request $request, $params = '')
     {
         $page = \Teknoza::instance()->findRoute($params);
         $page_url = $page->url();        
@@ -36,7 +37,7 @@ class IndexController extends Controller
         // Available locales
         \View::share('locales', Locale::all());
         
-        return $page->logic()->with([
+        return $page->logic($request)->with([
             'title' => $page->title(),
             'image' => $page->image(),
             'type' => $page->type()

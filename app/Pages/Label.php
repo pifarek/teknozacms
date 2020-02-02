@@ -1,12 +1,14 @@
 <?php
 namespace App\Pages;
 
-class Label extends Main{    
+use Illuminate\Http\Request;
+
+class Label extends Main{
     public function __construct(){
         $this->title = 'Label';
     }
     
-    public function logic(){
+    public function logic(Request $request){
         return redirect('/');
     }
 }

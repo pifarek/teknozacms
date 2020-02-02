@@ -2,14 +2,17 @@
 namespace App\Pages;
 
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
-class Html extends Main{    
+class Html extends Main
+{
     public function __construct($item_id = null){
         $this->title = 'HTML Page';
         parent::__construct($item_id);
     }  
     
-    public function logic(){        
+    public function logic(Request $request)
+    {
         // Get the view type
         // 1_column, 2_columns or 3_columns
         $view = $this->getCustom('view')?: '1_column';
@@ -27,7 +30,8 @@ class Html extends Main{
         ]);
     }
     
-    public function fields(){
+    public function fields()
+    {
         return [
             // Textarea where you can enter page content
             (object) ['label' => trans('admin.page_html_content'), 'name' => 'content', 'type' => 'textarea', 'multilanguage' => true, 'rules' => ['required']],
@@ -38,9 +42,5 @@ class Html extends Main{
                     'columns_3' => trans('admin.page_html_view_3'),
                 ]]
         ];
-    }
-    
-    public function route() {
-        
     }
 }

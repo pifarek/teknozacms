@@ -1,23 +1,25 @@
 <?php
 namespace App\Pages;
 
-use App\Models\News\News as NewsModel;
-use App\Models\News\NewsTranslation;
-use App\Models\News\Category;
+use App\Extensions\News\Models\News as NewsModel;
+use App\Extensions\News\Models\NewsTranslation;
+use App\Extensions\News\Models\Category;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 /**
  * Display News list and single News
  */
 class News extends Main
 {    
-    public function __construct($item_id = null){
+    public function __construct($item_id = null)
+    {
         $this->title = 'News';
         parent::__construct($item_id);
         $this->shortcut = ['name' => 'View News', 'url' => url('administrator/news')];
     }  
     
-    public function logic()
+    public function logic(Request $request)
     {
         $params = $this->params();
         $slug = $params[0];
@@ -60,9 +62,9 @@ class News extends Main
             }
             
             return redirect('/');
-        }else{
-            $search_string = request()->get('search_string');
-            $search_category = request()->get('search_category');
+        } else {
+            $search_string = $request->get('search_string');
+            $search_category = $request->get('search_category');
             
             // Here we will display news list
             $query = NewsModel::query();

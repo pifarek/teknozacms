@@ -3,15 +3,19 @@ namespace App\Pages;
 
 use App\Models\Multimedia\Album;
 use App\Models\Multimedia\Multimedia as MultimediaModel;
+use Illuminate\Http\Request;
 
-class Multimedia extends Main{    
-    public function __construct($item_id = null){
+class Multimedia extends Main
+{
+    public function __construct($item_id = null)
+    {
         $this->title = 'Multimedia';
         parent::__construct($item_id);
         $this->shortcut = ['name' => 'View Multimedia', 'url' => url('administrator/multimedia')];
     }  
     
-    public function logic(){
+    public function logic(Request $request)
+    {
         $type = $this->getCustom('display');
         $album_id = $this->getCustom('album')?: NULL;
         
@@ -40,7 +44,8 @@ class Multimedia extends Main{
         ]);
     }
     
-    public function fields(){
+    public function fields()
+    {
         return [
             (object) [
                 'label' => 'Display',
@@ -65,7 +70,8 @@ class Multimedia extends Main{
         ];
     }
     
-    private function getAlbums($parent_id = NULL, $level = 0){
+    private function getAlbums($parent_id = NULL, $level = 0)
+    {
         $tmp = [];
         
         $albums = Album::where('parent_id', '=', $parent_id)->get();
@@ -78,5 +84,4 @@ class Multimedia extends Main{
         }
         return $tmp;
     }
-
 }

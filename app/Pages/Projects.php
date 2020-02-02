@@ -1,20 +1,23 @@
 <?php
 namespace App\Pages;
 
-use App\Models\Projects\Project as ProjectModel;
-use App\Models\Projects\Tag;
+use App\Extensions\Projects\Models\Project as ProjectModel;
+use App\Extensions\Projects\Models\Tag;
+use Illuminate\Http\Request;
 
 /**
  * Display Projects list and single Project
  */
-class Projects extends Main{    
-    public function __construct($item_id = null){
+class Projects extends Main
+{
+    public function __construct($item_id = null)
+    {
         $this->title = 'Projects';
-        
         parent::__construct($item_id);
     }   
     
-    public function logic(){
+    public function logic(Request $request)
+    {
         $params = $this->params();
         $project_id = $params[0];
         if($project_id){
@@ -48,7 +51,6 @@ class Projects extends Main{
                 'projects' => $projects,
                 'tags' => $tags
             ]);
-            
         }
     }
 }

@@ -5,18 +5,22 @@ use App\Models\Events\Event as EventModel;
 use App\Models\Events\User as EventUser;
 use App\Models\Events\Ticket;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 /**
  * Display News list and single News
  */
-class Events extends Main{    
-    public function __construct($item_id = null){
+class Events extends Main
+{
+    public function __construct($item_id = null)
+    {
         $this->title = 'Events';
         parent::__construct($item_id);
         $this->shortcut = ['name' => 'View Events', 'url' => url('administrator/events')];
     }   
     
-    public function logic(){
+    public function logic(Request $request)
+    {
         $params = $this->params();
         $event_id = $params[0];
         if($event_id){

@@ -6,17 +6,16 @@ use App\Extensions\Menus\Models\Item;
 /**
  * Display Members/Board page
  */
-class Alias extends Main{    
-    public function __construct($item_id = null){
+class Alias extends Main
+{
+    public function __construct($item_id = null)
+    {
         $this->title = 'Alias';
         parent::__construct($item_id);
-    }  
-    
-    public function logic(){
-        
     }
     
-    public function aliasUrl(){
+    public function aliasUrl()
+    {
         $page_id = $this->getCustom('alias');
         $anchor = $this->getCustom('anchor');
         $page = Item::where('id', '=', $page_id)->get()->first();
@@ -33,7 +32,8 @@ class Alias extends Main{
         return $page->url . $anchor;
     }
     
-    public function fields() {
+    public function fields()
+    {
         // Get menu items
         $items = [];
         foreach(Item::where('id', '!=', $this->itemId())->get() as $item) {

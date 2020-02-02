@@ -2,17 +2,18 @@
 namespace App\Pages;
 
 use App\Extensions\Contacts\Models\Contact as ContactModel;
-use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class Contact extends Main
 {
-    public function __construct($item_id = null){
+    public function __construct($item_id = null)
+    {
         $this->title = 'Contact Page';
         parent::__construct($item_id);
         $this->shortcut = ['name' => 'View Contact Persons', 'url' => url('administrator/contacts')];        
     }  
     
-    public function logic()
+    public function logic(Request $request)
     {
         $contact_id = (int) $this->getCustom('contact_id');
 
@@ -25,23 +26,23 @@ class Contact extends Main
         
         if($contact) {
             $success = false;
-            if(\Request::method() === 'POST') {
+            if($request->method() === 'POST') {
                 $rules = [
                     'name' => ['required'],
                     'email' => ['required', 'email'],
                     'message' => ['required']
                 ];
                 
-                $validation = \Validator::make(request()->all(), $rules);
+                $validation = \Validator::make($request->all(), $rules);
                 if($validation->fails()){
                     return redirect()->back()->withInput()->withErrors($validation->errors());
                 }else{
                     
                     $data = [
                         'ip_addr' => $_SERVER['REMOTE_ADDR'],
-                        'name' => request()->get('name'),
-                        'email' => request()->get('email'),
-                        'body' => request()->get('message'),
+                        'name' => $request->get('name'),
+                        'email' => $request->get('email'),
+                        'body' => $request->get('message'),
                     ];
                     
                     $success = true;
