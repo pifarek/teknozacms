@@ -3,14 +3,15 @@
 namespace App\Extensions\Newsletter\Controllers\Send;
 
 use App\Http\Controllers\Administrator\BaseController;
+use Illuminate\Http\Request;
 
 
 class JsonController extends BaseController
 {
 
-    public function contentElements()
+    public function contentElements(Request $request)
     {
-        $elements = \Input::get('elements');
+        $elements = $request->get('elements');
         
         if(!$elements or !  is_array($elements)){
             return response()->json(['status' => 'err']);

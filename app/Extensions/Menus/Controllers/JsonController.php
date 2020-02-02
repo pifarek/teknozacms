@@ -5,6 +5,7 @@ namespace App\Extensions\Menus\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Menus\Models\Menu;
 use App\Extensions\Menus\Models\Item;
+use Illuminate\Http\Request;
 
 class JsonController extends BaseController
 {
@@ -44,13 +45,13 @@ class JsonController extends BaseController
      * @param int $item_id
      * @return json
      */
-    public function postItemIntroImage($item_id){
+    public function postItemIntroImage(Request $request, $item_id){
         $item = Item::find($item_id);
         if(!$item){
             return response()->json(['status' => 'err']);
         }
         
-        $image = \Input::file('image');
+        $image = $request->file('image');
         
         $rules = [
             'image' => ['required', 'image']

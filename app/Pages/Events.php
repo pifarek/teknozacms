@@ -20,7 +20,7 @@ class Events extends Main{
         $params = $this->params();
         $event_id = $params[0];
         if($event_id){
-            $action = \Input::get('action');
+            $action = request()->get('action');
             // If we need to register to the event
             if($action === 'register'){
                 $event = EventModel::where('status', true)->get()->find($event_id);
@@ -52,7 +52,7 @@ class Events extends Main{
                     ];
                     
                     // Get number of tickets
-                    $quantity = \Input::get('quantity');
+                    $quantity = request()->get('quantity');
                     
                     for($i = 2; $i < ($quantity + 1) && $i < ($event->guests + 1); $i++){
                         $rules += [
@@ -62,7 +62,7 @@ class Events extends Main{
                         var_dump($i);
                     }
 
-                    $validation = \Validator::make(\Input::all(), $rules);
+                    $validation = \Validator::make(request()->all(), $rules);
                     
                     if($validation->fails()){
                         return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -70,11 +70,11 @@ class Events extends Main{
 
                     $eventUser = new EventUser;
                     $eventUser->event_id = $event_id;
-                    $eventUser->email = \Input::get('email');
+                    $eventUser->email = request()->get('email');
                     $eventUser->save();
                     
                     // Check if we have that user registered
-                    $user = User::where('email', \Input::get('email'))->get()->first();
+                    $user = User::where('email', request()->get('email'))->get()->first();
                     
                     if($user){
                         $eventUser->user_id = $user->id;
@@ -84,16 +84,16 @@ class Events extends Main{
                     // Add a main user
                     $ticket = new Ticket;
                     $ticket->user_id = $eventUser->id;
-                    $ticket->name = \Input::get('first_name');
-                    $ticket->surname = \Input::get('last_name');
+                    $ticket->name = request()->get('first_name');
+                    $ticket->surname = request()->get('last_name');
                     $ticket->save();
                     
                     // Add next users
                     for($i = 2; $i < ($quantity + 1) && $i < ($event->guests + 1); $i++){
                         $ticket = new Ticket;
                         $ticket->user_id = $eventUser->id;
-                        $ticket->name = \Input::get('first_name_'. $i);
-                        $ticket->surname = \Input::get('last_name_' . $i);
+                        $ticket->name = request()->get('first_name_'. $i);
+                        $ticket->surname = request()->get('last_name_' . $i);
                         $ticket->save();
                     }
                     

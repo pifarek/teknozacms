@@ -16,7 +16,7 @@ class ProfileController extends BaseController
         ]);
     }
     
-    public function postIndex()
+    public function postIndex(Request $request)
     {
         $rules = [
             'image' => ['max:10000', 'image'],
@@ -24,12 +24,12 @@ class ProfileController extends BaseController
             'surname' => [],
         ];
         
-        if(\Input::get('password')) {
+        if($request->get('password')) {
             $rules['password'] = ['min:6'];
             $rules['repassword'] = ['min:6', 'same:password'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -39,10 +39,10 @@ class ProfileController extends BaseController
         
 
         
-        $user->name = \Input::get('name');
-        $user->surname = \Input::get('surname');
-        if(\Input::get('password')){
-            $user->password = bcrypt(\Input::get('password'));
+        $user->name = $request->get('name');
+        $user->surname = $request->get('surname');
+        if($request->get('password')){
+            $user->password = bcrypt($request->get('password'));
         }
         $user->save();
         
@@ -76,7 +76,7 @@ class ProfileController extends BaseController
             'image' => ['max:10000', 'image']
         ];
 
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
 
         if($validation->passes()) {
             if($avatar) {

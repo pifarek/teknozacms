@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         {!! Form::label('name', trans('partners::admin.partners_add_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name'), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">

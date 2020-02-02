@@ -42,13 +42,13 @@
                 <div class="form-group">
                     <div class="form-group">
                         {!! Form::label('name', __('partners::admin.partners_edit_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name', $partner->name), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name', $partner->name), ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         {!! Form::label('url', __('partners::admin.partners_edit_url'), ['class' => 'control-label']) !!}
-                        {!! Form::text('url', Input::old('url', $partner->url), ['class' => 'form-control']) !!}
+                        {!! Form::text('url', old('url', $partner->url), ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">

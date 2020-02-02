@@ -82,14 +82,14 @@
                             <div role="tabpanel" class="tab-pane" id="album-add-{{ $locale->language }}">
                                 <div class="form-group">
                                     {!! Form::label('name-' . $locale->language, trans('multimedia::admin.manage_name'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                                    {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             @endforeach
                         </div>
                         <div class="form-group">
                             {!! Form::label('parent', trans('multimedia::admin.manage_parent'), ['class' => 'control-label']) !!}
-                            {!! Form::select('parent', [0 => 'Parent'] + $albums, Input::old('parent'), ['class' => 'form-control selectpicker']) !!}
+                            {!! Form::select('parent', [0 => 'Parent'] + $albums, old('parent'), ['class' => 'form-control selectpicker']) !!}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -132,14 +132,14 @@
                             <div role="tabpanel" class="tab-pane" id="album-edit-{{ $locale->language }}">
                                 <div class="form-group">
                                     {!! Form::label('name-' . $locale->language, trans('multimedia::admin.manage_name'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                                    {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             @endforeach
                         </div>
                         <div class="form-group">
                             {!! Form::label('parent', trans('multimedia::admin.manage_parent'), ['class' => 'control-label']) !!}
-                            {!! Form::select('parent', [0 => 'Parent'] + $albums, Input::old('parent'), ['class' => 'form-control selectpicker']) !!}
+                            {!! Form::select('parent', [0 => 'Parent'] + $albums, old('parent'), ['class' => 'form-control selectpicker']) !!}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -182,18 +182,18 @@
                         <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('name-' . $locale->language, trans('multimedia::admin.manage_name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('description-' . $locale->language, trans('multimedia::admin.manage_description'), ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @endforeach
                     </div>
                     <div class="form-group">
                         {!! Form::label('album', trans('multimedia::admin.manage_album'), ['class' => 'control-label']) !!}
-                        {!! Form::select('album', [0 => 'Parent'] + $albums, Input::old('album'), ['class' => 'form-control selectpicker']) !!}
+                        {!! Form::select('album', [0 => 'Parent'] + $albums, old('album'), ['class' => 'form-control selectpicker']) !!}
                     </div>
                     <ul class="nav nav-tabs nav-tabs-types" role="tablist">
                         <li role="presentation"><a href="#type-image" aria-controls="type-image" role="tab" data-toggle="tab"><i class="fa fa-image"></i> {{ trans('multimedia::admin.manage_image') }}</a></li>
@@ -209,7 +209,7 @@
                                 <span class="btn btn-success fileinput-button">
                                     <i class="fa fa-plus"></i> <span>{{ trans('multimedia::admin.manage_select_image') }}</span>
                                     <input class="fileupload" type="file" name="image" data-url="{{ url('administrator/multimedia/json/image-upload') }}">
-                                    <input type="hidden" name="image-filename" value="{{ Input::old('image-filename') }}">
+                                    <input type="hidden" name="image-filename" value="{{ old('image-filename') }}">
                                 </span>
                                 <span class="help-block">{{ trans('multimedia::admin.manage_image_help') }}</span>
                             </div>
@@ -217,7 +217,7 @@
                         <div role="tabpanel" class="tab-pane tab-pane-type" id="type-video">
                             <div class="form-group{!! $errors->has('url')? ' has-error' : '' !!}">
                                 {!! Form::label('url', trans('multimedia::admin.manage_video_url'), ['class' => 'label-control']) !!}
-                                {!! Form::text('url', Input::old('url'), ['class' => 'form-control']) !!}
+                                {!! Form::text('url', old('url'), ['class' => 'form-control']) !!}
                                 <span class="help-block">{{ trans('multimedia::admin.manage_video_help') }}</span>
                             </div>
                         </div>
@@ -264,18 +264,18 @@
                         <div role="tabpanel" class="tab-pane" id="edit-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('name-' . $locale->language, trans('multimedia::admin.manage_name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('description-' . $locale->language, trans('multimedia::admin.manage_description'), ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @endforeach
                     </div>
                     <div class="form-group">
                         {!! Form::label('album', trans('multimedia::admin.manage_album'), ['class' => 'control-label']) !!}
-                        {!! Form::select('album', [0 => 'Parent'] + $albums, Input::old('album'), ['class' => 'form-control selectpicker']) !!}
+                        {!! Form::select('album', [0 => 'Parent'] + $albums, old('album'), ['class' => 'form-control selectpicker']) !!}
                     </div>                    
                 </div>
                 <div class="modal-footer">

@@ -8,6 +8,7 @@ use App\Extensions\Multimedia\Models\Multimedia;
 use App\Extensions\Multimedia\Models\Image;
 use App\Extensions\Multimedia\Models\Video;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class JsonController extends BaseController
 {
@@ -16,13 +17,13 @@ class JsonController extends BaseController
      * Upload temporary image
      * @return type
      */
-    public function imageUpload()
+    public function imageUpload(Request $request)
     {
         $rules = [
             'image' => ['required', 'mimes:jpeg,jpg,png', 'max:10000']
         ];
         
-        $validation = \Validator::make(['image' => \Input::file('image')], $rules);
+        $validation = \Validator::make(['image' => $request->file('image')], $rules);
         
         if($validation->fails()){
             return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
@@ -30,16 +31,16 @@ class JsonController extends BaseController
         
         $filename = uniqid(null, true) . '.jpg';
 
-        \Image::make(\Input::file('image'))->resize(800, null, function ($constraint) {
+        \Image::make($request->file('image'))->resize(800, null, function ($constraint) {
             $constraint->aspectRatio();
         })->save('upload/tmp/' . $filename);
         
         return response()->json(['status' => 'ok', 'filename' => $filename]);
     }
     
-    public function add()
+    public function add(Request $request)
     {
-        switch(\Input::get('type')){
+        switch($request->get('type')){
             case 'image':
                 $rules = [
                     'image-filename' => ['required'],
@@ -50,7 +51,7 @@ class JsonController extends BaseController
                     $rules['name-' . $locale->language] = ['required'];
                 }
 
-                $validation = \Validator::make(\Input::all(), $rules);
+                $validation = \Validator::make($request->all(), $rules);
 
                 if($validation->fails()){
                     return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
@@ -58,7 +59,7 @@ class JsonController extends BaseController
 
                 $filename = uniqid(null, true) . '.jpg';
 
-                \File::copy('upload/tmp/' . \Input::get('image-filename'), 'upload/multimedia/' . $filename);
+                \File::copy('upload/tmp/' . $request->get('image-filename'), 'upload/multimedia/' . $filename);
                 
                 $order = 0;
                 $last_item = Multimedia::orderBy('order', 'DESC')->limit(1)->get()->first();
@@ -70,12 +71,12 @@ class JsonController extends BaseController
                 $multimedia->order = $order;
                 $multimedia->type = 'image';
                 $multimedia->featured = 0;
-                $multimedia->album_id = \Input::get('album')?: NULL;
+                $multimedia->album_id = $request->get('album')?: NULL;
 
                 foreach(Locale::all() as $locale){
                     \App::setLocale($locale->language);
-                    $multimedia->name = \Input::get('name-'. $locale->language);
-                    $multimedia->description = \Input::get('description-'. $locale->language);
+                    $multimedia->name = $request->get('name-'. $locale->language);
+                    $multimedia->description = $request->get('description-'. $locale->language);
                 }
 
                 $multimedia->save();
@@ -86,7 +87,7 @@ class JsonController extends BaseController
                 $image->save();
 
                 // Remove image from tmp
-                \File::delete('upload/tmp/' . \Input::get('image-filename'));
+                \File::delete('upload/tmp/' . $request->get('image-filename'));
                 
                 \App::setLocale($this->administratorLocale);
                 
@@ -103,13 +104,13 @@ class JsonController extends BaseController
                     $rules['name-' . $locale->language] = ['required'];
                 }
 
-                $validation = \Validator::make(\Input::all(), $rules);
+                $validation = \Validator::make($request->all(), $rules);
 
                 if($validation->fails()){
                     return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
                 }
 
-                $movie = Multimedia::checkVideoType(\Input::get('url'));
+                $movie = Multimedia::checkVideoType($request->get('url'));
                 $filename = 'video.jpg';
                 if($movie['type'] === 'youtube'){
                     $image = @file_get_contents('http://img.youtube.com/vi/' . $movie['code'] . '/0.jpg');
@@ -130,18 +131,18 @@ class JsonController extends BaseController
                 $multimedia->order = $order;
                 $multimedia->type = 'video';
                 $multimedia->featured = 0;
-                $multimedia->album_id = \Input::get('album')?: NULL;
+                $multimedia->album_id = $request->get('album')?: NULL;
 
                 foreach(Locale::all() as $locale){
                     \App::setLocale($locale->language);
-                    $multimedia->name = \Input::get('name-'. $locale->language);
-                    $multimedia->description = \Input::get('description-'. $locale->language);
+                    $multimedia->name = $request->get('name-'. $locale->language);
+                    $multimedia->description = $request->get('description-'. $locale->language);
                 }
 
                 $multimedia->save();
                 
                 $video = new Video;
-                $video->url = \Input::get('url');
+                $video->url = $request->get('url');
                 $video->multimedia_id = $multimedia->id;
                 $video->filename = $filename;
                 $video->save();
@@ -201,10 +202,12 @@ class JsonController extends BaseController
     
     /**
      * Edit multimedia item
+     * @param Request $request
      * @param int $multimedia_id
      * @return json
      */
-    public function edit($multimedia_id){
+    public function edit(Request $request, $multimedia_id)
+    {
         $multimedia = Multimedia::find($multimedia_id);
         if(!$multimedia){
             return response()->json(['status' => 'err']);
@@ -218,18 +221,18 @@ class JsonController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
 
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
 
         if($validation->fails()){
             return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
         }
         
-        $multimedia->album_id = \Input::get('album')?: NULL;
+        $multimedia->album_id = $request->get('album')?: NULL;
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $multimedia->name = \Input::get('name-'. $locale->language);
-            $multimedia->description = \Input::get('description-'. $locale->language);
+            $multimedia->name = $request->get('name-'. $locale->language);
+            $multimedia->description = $request->get('description-'. $locale->language);
         }
         
         $multimedia->save();
@@ -241,7 +244,7 @@ class JsonController extends BaseController
         return response()->json(['status' => 'ok', 'item_id' => $multimedia->id, 'view' => $view->render()]);
     }
     
-    public function albumEdit($album_id)
+    public function albumEdit(Request $request, $album_id)
     {
         $album = Album::find($album_id);
         if(!$album){
@@ -256,17 +259,17 @@ class JsonController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
 
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
 
         if($validation->fails()) {
             return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
         }
         
-        $album->parent_id = \Input::get('parent')?: NULL;
+        $album->parent_id = $request->get('parent')?: NULL;
         
         foreach(Locale::all() as $locale) {
             \App::setLocale($locale->language);
-            $album->name = \Input::get('name-'. $locale->language);
+            $album->name = $request->get('name-'. $locale->language);
         }
         
         $album->save();
@@ -278,7 +281,7 @@ class JsonController extends BaseController
         return response()->json(['status' => 'ok', 'album_id' => $album->id, 'view' => $view->render()]);
     }
     
-    public function albumAdd()
+    public function albumAdd(Request $request)
     {
         $rules = [
             'parent' => ['numeric']
@@ -288,7 +291,7 @@ class JsonController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return response()->json(['status' => 'err', 'errors' => $validation->errors()->toArray()]);
@@ -298,10 +301,10 @@ class JsonController extends BaseController
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $album->name = \Input::get('name-' . $locale->language);
+            $album->name = $request->get('name-' . $locale->language);
         }
         
-        $album->parent_id = \Input::get('parent')?: NULL;
+        $album->parent_id = $request->get('parent')?: NULL;
         $album->save();
         
         \App::setLocale($this->administratorLocale);
@@ -365,11 +368,12 @@ class JsonController extends BaseController
     
     /**
      * Change the items order
+     * @param Request $request
      * @return type
      */
-    public function order()
+    public function order(Request $request)
     {
-        $ids = \Input::get('ids');
+        $ids = $request->get('ids');
         if(!$ids){
             return response()->json(['status' => 'err']);
         }

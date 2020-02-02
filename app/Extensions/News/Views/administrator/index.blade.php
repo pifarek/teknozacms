@@ -44,6 +44,8 @@
                             <td>
                                 @if($single->filename)
                                 <a href="{{ url('upload/news/n/' . $single->filename) }}" data-fancybox="preview"><img src="{{ url('upload/news/s/' . $single->filename) }}" alt="{{ $single->title }}"></a>
+                                @else
+                                <img src="{{ url('assets/administrator/images/default_news.png') }}" alt="">
                                 @endif
                             </td>
                             <td>
@@ -80,12 +82,12 @@
             @endif
         </section>
     </div>
-    
+
 </div>
 @endsection
 
 @section('scripts')
     <script>
-        var MenusTranslations = {'js_remove': '{{ __('news::admin.js_remove') }}'};
+        var NewsTranslations = {'js_remove': '{{ __('news::admin.js_remove') }}'};
     </script>
 @endsection

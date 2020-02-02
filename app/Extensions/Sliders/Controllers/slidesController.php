@@ -14,10 +14,10 @@ class SlidesController extends BaseController
     /*
      * Add a new slider
      */
-    public function create()
+    public function create(Request $request)
     {
         // Selected slider
-        $slider_id = \Input::get('slider_id');
+        $slider_id = $request->get('slider_id');
         
         // Get the sliders
         $sliders = Slider::pluck('shortcode', 'id');
@@ -52,7 +52,7 @@ class SlidesController extends BaseController
             }
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -64,7 +64,7 @@ class SlidesController extends BaseController
         
         // Check last order
         $order = 0;
-        $lastSlide = Slide::where('slider_id', \Input::get('slider'))->limit(1)->orderBy('order', 'desc')->get()->first();
+        $lastSlide = Slide::where('slider_id', $request->get('slider'))->limit(1)->orderBy('order', 'desc')->get()->first();
         if($lastSlide){
             $order = $lastSlide->order + 1;
         }
@@ -89,7 +89,7 @@ class SlidesController extends BaseController
         $slide->blank = $request->get('blank')? true : false;
         $slide->available_date = $request->get('available_date');
         
-        if(\Input::get('available_date') == 1){
+        if($request->get('available_date') == 1){
             $slide->start_date = strtotime($request->get('start_date'));
             $slide->end_date = strtotime($request->get('end_date'));
         }
@@ -124,7 +124,7 @@ class SlidesController extends BaseController
             return redirect('administrator/sliders');
         }
         
-        $locales = Locale::find(\Input::get('locales'));
+        $locales = Locale::find($request->get('locales'));
         
         if(!$locales){
             return redirect()->back()->withErrors(new \Illuminate\Support\MessageBag(['locales' => __('admin.select_one_language')]))->withInput();

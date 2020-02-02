@@ -25,7 +25,7 @@
                 {!! Form::open(['class' => 'form-floating', 'files' => true]) !!}
                 <div class="form-group{!! $errors->has('type')? ' has-error' : '' !!}">
                     {!! Form::label('type', trans('newsletter::admin.send_greetings_type'), ['class' => 'control-label']) !!}
-                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_greetings_type_users'), 'groups' => trans('newsletter::admin.send_greetings_type_groups')], Input::old('type'), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_greetings_type_users'), 'groups' => trans('newsletter::admin.send_greetings_type_groups')], old('type'), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 <div class="users-list-container">
                     @if($users->count())
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group{!! $errors->has('subject')? ' has-error' : '' !!}">
                     {!! Form::label('subject', trans('newsletter::admin.send_greetings_subject'), ['class' => 'control-label']) !!}
-                    {!! Form::text('subject', Input::old('subject'), ['class' => 'form-control']) !!}
+                    {!! Form::text('subject', old('subject'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group{!! $errors->has('image')? ' has-error' : '' !!}">
                     {!! Form::file('image') !!}

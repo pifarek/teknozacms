@@ -31,12 +31,12 @@
                 
                 <div class="form-group{!! $errors->has('analytics')? ' has-error' : '' !!}">
                     {!! Form::label('analytics', trans('admin.settings_statistics_index_analytics'), ['class' => 'control-label']) !!}
-                    {!! Form::text('analytics', Input::old('analytics', Settings::get('analytics')), ['class' => 'form-control']) !!}
+                    {!! Form::text('analytics', old('analytics', Settings::get('analytics')), ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group{!! $errors->has('analytics')? ' has-error' : '' !!}">
                     {!! Form::label('analytics_view_id', trans('admin.settings_statistics_index_analytics_view_id'), ['class' => 'control-label']) !!}
-                    {!! Form::text('analytics_view_id', Input::old('analytics_view_id', Settings::get('analytics_view_id')), ['class' => 'form-control']) !!}
+                    {!! Form::text('analytics_view_id', old('analytics_view_id', Settings::get('analytics_view_id')), ['class' => 'form-control']) !!}
                     <p class="form-text text-muted">
                         @lang('admin.settings_statistics_index_analytics_view_id_description')
                     </p>

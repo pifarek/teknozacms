@@ -34,38 +34,38 @@
                     <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                         <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('name-' . $locale->language, trans('contacts::admin.add_name'), ['class' => 'control-label']) !!}
-                            {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                            {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('description-' . $locale->language, trans('contacts::admin.add_description'), ['class' => 'control-label']) !!}
-                            {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language), ['class' => 'form-control']) !!}
+                            {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div class="form-group">
                     {!! Form::label('street', trans('contacts::admin.add_street'), ['class' => 'control-label']) !!}
-                    {!! Form::text('street', Input::old('street'), ['class' => 'form-control']) !!}
+                    {!! Form::text('street', old('street'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('postal', trans('contacts::admin.add_postal'), ['class' => 'control-label']) !!}
-                    {!! Form::text('postal', Input::old('postal'), ['class' => 'form-control']) !!}
+                    {!! Form::text('postal', old('postal'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('city', trans('contacts::admin.add_city'), ['class' => 'control-label']) !!}
-                    {!! Form::text('city', Input::old('city'), ['class' => 'form-control']) !!}
+                    {!! Form::text('city', old('city'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('phone', trans('contacts::admin.add_phone'), ['class' => 'control-label']) !!}
-                    {!! Form::text('phone', Input::old('phone'), ['class' => 'form-control']) !!}
+                    {!! Form::text('phone', old('phone'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fax', trans('contacts::admin.add_fax'), ['class' => 'control-label']) !!}
-                    {!! Form::text('fax', Input::old('fax'), ['class' => 'form-control']) !!}
+                    {!! Form::text('fax', old('fax'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('email', trans('contacts::admin.add_email'), ['class' => 'control-label']) !!}
-                    {!! Form::text('email', Input::old('email'), ['class' => 'form-control']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">{{ trans('contacts::admin.add_add') }}</button>

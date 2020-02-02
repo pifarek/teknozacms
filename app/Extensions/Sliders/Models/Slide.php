@@ -2,26 +2,22 @@
 namespace App\Extensions\Sliders\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Slide extends Model
+class Slide extends Model implements TranslatableContract
 {
     use Translatable;
     
     protected $table = 'slides';
     
-    protected $translatable = ['name', 'description', 'button_label'];
+    protected $translatedAttributes = ['name', 'description', 'button_label'];
     
     public $timestamps = false;
     
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Sliders\Models\SlideTranslation::class);
-    }
-    
     public function locales()
     {
-        $translations = \App\Extensions\Sliders\Models\SlideTranslation::where('slide_id', '=', $this->id)->get();
+        $translations = SlideTranslation::where('slide_id', '=', $this->id)->get();
         $locales = [];
         foreach($translations as $translation){
             $locales[] = \App\Models\Locale::where('language', '=', $translation->locale)->get()->first();
@@ -31,13 +27,13 @@ class Slide extends Model
     
     public function slider()
     {
-        return $this->belongsTo(\App\Extensions\Sliders\Models\Slider::class);
+        return $this->belongsTo(Slider::class);
     }
     
-    public function locale()
+    /*public function locale()
     {
         return $this->belongsTo(\App\Models\Locale::class);
-    }
+    }*/
     
     public function delete()
     {

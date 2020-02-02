@@ -5,6 +5,7 @@ namespace App\Extensions\News\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\News\Models\Category;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class CategoriesController extends BaseController
 {
@@ -29,7 +30,7 @@ class CategoriesController extends BaseController
         return view('News.Views.administrator.category-add', ['locales' => Locale::all()]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [];
         
@@ -37,7 +38,7 @@ class CategoriesController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -47,7 +48,7 @@ class CategoriesController extends BaseController
         
         foreach(Locale::all() as $locale) {
             \App::setLocale($locale->language);
-            $category->name = \Input::get('name-' . $locale->language);
+            $category->name = $request->get('name-' . $locale->language);
         }
         
         $category->save();
@@ -72,10 +73,11 @@ class CategoriesController extends BaseController
     
     /**
      * Update selected category
-     * @param type $news_id
-     * @return type
+     * @param Request $request
+     * @param int $category_id
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function update($category_id)
+    public function update(Request $request, $category_id)
     {
         $category = Category::find($category_id);
         if(!$category) {
@@ -88,14 +90,14 @@ class CategoriesController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         foreach(Locale::all() as $locale) {
-            $category->translate($locale->language)->name = \Input::get('name-' . $locale->language);
+            $category->translate($locale->language)->name = $request->get('name-' . $locale->language);
         }
         
         $category->save();

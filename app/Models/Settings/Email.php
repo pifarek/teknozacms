@@ -3,10 +3,12 @@
 namespace App\Models\Settings;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\IsTranslatable;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Illuminate\Support\Str;
 
-class Email extends Model implements IsTranslatable{
+class Email extends Model implements TranslatableContract
+{
     use Translatable;
 
     protected $table = 'emails';
@@ -14,21 +16,13 @@ class Email extends Model implements IsTranslatable{
     public $timestamps = false;
 
     /**
-     * @var string
-     */
-    protected $translator = 'App\Models\Settings\EmailTranslation';
-
-    /**
      * @var array
      */
     protected $translatedAttributes = ['content', 'subject'];
     
-    public function translations(){
-        return $this->hasMany(\App\Models\Settings\EmailTranslation::class);
-    }
-    
-    public function setTagAttribute($value){
-        $tag = str_slug($value, '_');
+    public function setTagAttribute($value)
+    {
+        $tag = Str::slug($value, '_');
         $tmp = $tag;
         
         while($check = $this->where('tag', '=', $tmp)->where('id', '!=', (int)$this->id)->get()->first()){

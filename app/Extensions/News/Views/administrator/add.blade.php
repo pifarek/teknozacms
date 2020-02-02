@@ -46,10 +46,10 @@
                         <div role="tabpanel" class="tab-pane" id="locale-{{ $locale->id }}" data-locale="{{ $locale->id }}">
                             <div class="form-group{!! $errors->has('title-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('title-' . $locale->language, trans('news::admin.news_add_title'), ['class' => 'control-label']) !!}
-                                {!! Form::text('title-' . $locale->language, Input::old('title-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::text('title-' . $locale->language, old('title-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('content-' . $locale->language)? ' has-error' : '' !!}">
-                                {!! Form::textarea('content-' . $locale->language, Input::old('content-' . $locale->language), ['class' => 'form-control tinymce']) !!}
+                                {!! Form::textarea('content-' . $locale->language, old('content-' . $locale->language), ['class' => 'form-control tinymce']) !!}
                             </div>
                         </div>
                         @endforeach
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('category', trans('news::admin.news_add_category'), ['class' => 'control-label']) !!}
-                    {!! Form::select('category', ['0' => trans('news::admin.news_category_not_selected')] + $categories, Input::old('category', 0), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('category', ['0' => trans('news::admin.news_category_not_selected')] + $categories, old('category', 0), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">{{ trans('news::admin.news_index_add') }}</button>

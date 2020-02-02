@@ -5,6 +5,7 @@ namespace App\Extensions\Newsletter\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Newsletter\Models\User as NewsletterUser;
 use App\Extensions\Newsletter\Models\Group as NewsletterGroup;
+use Illuminate\Http\Request;
 
 class GroupsController extends BaseController
 {
@@ -29,20 +30,20 @@ class GroupsController extends BaseController
         return view('Newsletter.Views.administrator.group-add');
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $group = new NewsletterGroup;
-        $group->name = \Input::get('name');
+        $group->name = $request->get('name');
         $group->save();
         
         return redirect('administrator/newsletter/groups/' . $group->id . '/edit')->with('success', trans('newsletter::admin.msg_group_added'));
@@ -62,7 +63,7 @@ class GroupsController extends BaseController
         return view('Newsletter.Views.administrator.group-edit', ['group' => $group]);
     }
     
-    public function update($group_id)
+    public function update(Request $request, $group_id)
     {
         $group = NewsletterGroup::find($group_id);
         if(!$group){
@@ -73,13 +74,13 @@ class GroupsController extends BaseController
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $group->name = \Input::get('name');
+        $group->name = $request->get('name');
         $group->save();
         
         return redirect('administrator/newsletter/groups/')->with('success', trans('newsletter::admin.msg_group_updated'));

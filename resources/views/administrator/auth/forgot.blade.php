@@ -26,7 +26,7 @@
 
             <div class="form-group{{ $errors->count()? ' has-error' : '' }}">
                 {!! Form::label('email', trans('admin.auth_forgot_email'), ['class' => 'control-label']) !!}
-                {!! Form::text('email', Input::old('email'), ['class' => 'form-control']) !!}
+                {!! Form::text('email', old('email'), ['class' => 'form-control']) !!}
             </div>
                 
 

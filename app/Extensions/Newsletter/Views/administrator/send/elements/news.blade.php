@@ -16,7 +16,7 @@
         </h3>
 
         <p>
-            {{ str_limit(strip_tags($news->content), 200) }}
+            {{ \Illuminate\Support\Str::limit(strip_tags($news->content), 200) }}
         </p>
 
         <div style="height: 40px;">

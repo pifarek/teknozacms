@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 const webpack = require('webpack');
 
 /*
@@ -14,24 +14,24 @@ const webpack = require('webpack');
 
 mix.webpackConfig({
     module: {
-        loaders: [
+        rules: [
             {
                 test: require.resolve('tinymce/tinymce'),
-                loaders: [
-                    'imports?this=>window',
-                    'exports?window.tinymce'
+                use: [
+                    'imports-loader?this=>window',
+                    'exports-loader?window.tinymce'
                 ]
             },
             {
                 test: require.resolve('moment'),
                 use: [{
-                    loader: 'imports?this=>window',
-                    options: 'exports?global.moment'
+                    loader: 'imports-loader?this=>window',
+                    options: 'exports-loader?global.moment'
                 }]
             },
             {
                 test: /tinymce[\\/](themes|plugins)[\\/]/,
-                loader: 'imports?this=>window'
+                loader: 'imports-loader?this=>window'
             },
             {
                 test: /[\/\\]module\.js$/,
@@ -45,17 +45,13 @@ mix.webpackConfig({
         }
     },
     plugins: [
-
-        new webpack.IgnorePlugin(/\.\/locale$/),
-
+        new webpack.IgnorePlugin( /\.\/locale$/ ),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-            'global.moment': 'moment',
+
         }),
-
-
     ],
 });
 
@@ -90,8 +86,6 @@ mix.js([
     'node_modules/blueimp-file-upload/js/jquery.iframe-transport.js',
     'node_modules/blueimp-file-upload/js/jquery.fileupload.js',
     'node_modules/bootstrap-select/dist/js/bootstrap-select.js',
-    'node_modules/tinymce/tinymce.js',
-    'node_modules/moment-timezone/builds/moment-timezone.min.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
     'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
     'node_modules/raphael/raphael.js',

@@ -25,7 +25,7 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                 <div class="form-group{!! $errors->has('type')? ' has-error' : '' !!}">
                     {!! Form::label('type', trans('newsletter::admin.send_empty_type'), ['class' => 'control-label']) !!}
-                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_empty_type_users'), 'groups' => trans('newsletter::admin.send_empty_type_groups')], Input::old('type'), ['class' => 'form-control']) !!}
+                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_empty_type_users'), 'groups' => trans('newsletter::admin.send_empty_type_groups')], old('type'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="users-list-container">
                     @if($users->count())
@@ -59,11 +59,11 @@
                 </div>
                 <div class="form-group{!! $errors->has('subject')? ' has-error' : '' !!}">
                     {!! Form::label('subject', trans('newsletter::admin.send_empty_subject'), ['class' => 'control-label']) !!}
-                    {!! Form::text('subject', Input::old('subject'), ['class' => 'form-control']) !!}
+                    {!! Form::text('subject', old('subject'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group tinymce{!! $errors->has('content')? ' has-error' : '' !!}">
                     {!! Form::label('content', trans('newsletter::admin.send_empty_message'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('content', Input::old('content'), ['class' => 'form-control tinymce']) !!}
+                    {!! Form::textarea('content', old('content'), ['class' => 'form-control tinymce']) !!}
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.send_empty_submit') }}</button>

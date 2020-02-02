@@ -3,9 +3,10 @@
 namespace App\Extensions\Multimedia\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Multimedia extends Model
+class Multimedia extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -16,26 +17,21 @@ class Multimedia extends Model
     /**
      * @var array
      */
-    protected $translatable = ['name', 'description'];
-
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Multimedia\Models\MultimediaTranslation::class);
-    }
+    protected $translatedAttributes = ['name', 'description'];
     
     public function album()
     {
-        return $this->hasOne(\App\Extensions\Multimedia\Models\Album::class, 'id', 'album_id');
+        return $this->hasOne(Album::class, 'id', 'album_id');
     }
     
     public function image()
     {
-        return $this->hasOne(\App\Extensions\Multimedia\Models\Image::class);
+        return $this->hasOne(Image::class);
     }
     
     public function video()
     {
-        return $this->hasOne(\App\Extensions\Multimedia\Models\Video::class);
+        return $this->hasOne(Video::class);
     }
     
     public function isVideo()

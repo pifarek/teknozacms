@@ -3,9 +3,10 @@
 namespace App\Extensions\Multimedia\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Album extends Model
+class Album extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -15,16 +16,7 @@ class Album extends Model
     
     protected $fillable = ['id', 'name', 'description'];
     
-    protected $translatable = ['name' ,'description'];
-
-    public function translations(){
-        return $this->hasMany(\App\Extensions\Multimedia\Models\AlbumTranslation::class);
-    }
-    
-    /**
-     * @var array
-     */
-    protected $translatedAttributes = ['name'];
+    protected $translatedAttributes = ['name' ,'description'];
     
     public function thumbnail()
     {

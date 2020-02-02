@@ -25,11 +25,11 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('name', trans('menus::admin.menus_add_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name'), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('code')? ' has-error' : '' !!}">
                         {!! Form::label('code', trans('menus::admin.menus_add_short'), ['class' => 'control-label']) !!}
-                        {!! Form::text('code', Input::old('code'), ['class' => 'form-control']) !!}
+                        {!! Form::text('code', old('code'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('menus::admin.menus_add_submit') }}</button>

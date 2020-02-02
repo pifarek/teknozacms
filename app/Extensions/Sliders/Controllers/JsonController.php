@@ -5,6 +5,8 @@ namespace App\Extensions\Sliders\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Sliders\Models\Slider;
 use App\Extensions\Sliders\Models\Slide;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class JsonController extends BaseController
 {
@@ -43,14 +45,17 @@ class JsonController extends BaseController
     
     /**
      * Upload slide image
+     * @param Request $request
+     * @param int $slide_id
+     * @return JsonResponse
      */
-    public function image($slide_id)
+    public function image(Request $request, $slide_id)
     {
         $slide = Slide::find($slide_id);
         if(!$slide){
             return response()->json(['status' => 'err']);
         }
-        $image = \Input::file('image');
+        $image = $request->file('image');
         if(!$image){
             return response()->json(['status' => 'err']);
         }
@@ -70,9 +75,12 @@ class JsonController extends BaseController
     
     /**
      * Upload tmp slide image
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function imageTmp(){
-        $image = \Input::file('tmp');
+    public function imageTmp(Request $request)
+    {
+        $image = $request->file('tmp');
         if(!$image){
             return response()->json(['status' => 'err']);
         }

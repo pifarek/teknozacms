@@ -6,6 +6,7 @@ use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Projects\Models\Project;
 use App\Extensions\Projects\Models\Tag;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -31,7 +32,7 @@ class IndexController extends BaseController
         return view('Projects.Views.administrator.add', ['locales' => Locale::all()]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [
 
@@ -41,7 +42,7 @@ class IndexController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -51,11 +52,11 @@ class IndexController extends BaseController
         
         foreach(Locale::all() as $locale) {
             \App::setLocale($locale->language);
-            $project->name = \Input::get('name-' . $locale->language);
-            $project->description = \Input::get('description-' . $locale->language);
+            $project->name = $request->get('name-' . $locale->language);
+            $project->description = $request->get('description-' . $locale->language);
         }
         
-        $project->year = \Input::get('year');
+        $project->year = $request->get('year');
         $project->save();
 
         \App::setLocale($this->administratorLocale);
@@ -96,7 +97,7 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function update($project_id)
+    public function update(Request $request, $project_id)
     {
         $project = Project::find($project_id);
         if(!$project){
@@ -111,7 +112,7 @@ class IndexController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -119,17 +120,17 @@ class IndexController extends BaseController
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $project->name = \Input::get('name-' . $locale->language);
-            $project->description = \Input::get('description-' . $locale->language);
+            $project->name = $request->get('name-' . $locale->language);
+            $project->description = $request->get('description-' . $locale->language);
         }
         
         // First remove all tags
         $project->tags()->detach();
         
-        $project->tags()->attach(\Input::get('tags'));
+        $project->tags()->attach($request->get('tags'));
         
-        $project->year = \Input::get('year');
-        $project->partner_id = \Input::get('partner')?: NULL;
+        $project->year = $request->get('year');
+        $project->partner_id = $request->get('partner')?: NULL;
         $project->save();
 
         \App::setLocale($this->administratorLocale);

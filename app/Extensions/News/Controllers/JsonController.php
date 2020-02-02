@@ -5,15 +5,19 @@ namespace App\Extensions\News\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\News\Models\News;
 use App\Extensions\News\Models\Category;
+use http\Client\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class JsonController extends BaseController
 {
     /**
      * Remove selected news
-     * @param int $category_id
+     * @param Request $request
+     * @param int $news_id
      * @return type
      */
-    public function remove($news_id)
+    public function remove(Request $request, $news_id)
     {
         $news = News::find($news_id);
         
@@ -45,36 +49,41 @@ class JsonController extends BaseController
     
     /**
      * Upload news image
+     * @param Request $request
+     * @param int $news_id
+     * @return JsonResponse
      */
-    public function imageUpload($news_id) {
+    public function imageUpload(Request $request, $news_id)
+    {
         $news = News::find($news_id);
         
         if(!$news) {
             return response()->json(['status' => 'err']);
         }
         
-        $image = \Input::file('image');
+        $image = $request->file('image');
         
         $rules = [
             'image' => ['required', 'image']
         ];
         
         $validation = \Validator::make(['image' => $image], $rules);
-        
-        if($validation->passes()) {
-            $filename = uniqid(null, true) . '.jpg';
-        
-            \Image::make($image->getRealPath())->resize(400, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('upload/news/s/' . $filename);
 
-            \Image::make($image->getRealPath())->fit(1200, 400)->save('upload/news/n/' . $filename);
-            
-            $news->filename = $filename;
-            $news->save();
-            return response()->json(['status' => 'ok', 'filename' => $filename]);
-        }        
-        return response()->json(['status' => 'err']);
+        if($validation->fails()) {
+            return response()->json(['status' => 'err', 'errors' => $validation->errors()]);
+        }
+
+        $filename = uniqid(null, true) . '.jpg';
+
+        \Image::make($image->getRealPath())->resize(400, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('upload/news/s/' . $filename);
+
+        \Image::make($image->getRealPath())->fit(1200, 400)->save('upload/news/n/' . $filename);
+
+        $news->filename = $filename;
+        $news->save();
+        return response()->json(['status' => 'ok', 'filename' => $filename]);
     }
     
     public function imageRemove($news_id)

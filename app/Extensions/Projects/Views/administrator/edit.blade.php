@@ -53,22 +53,22 @@
                     <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                         <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('name-' . $locale->language, trans('projects::admin.projects_edit_name'), ['class' => 'control-label']) !!}
-                            {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language, $project->translate($locale->language)->name), ['class' => 'form-control']) !!}
+                            {!! Form::text('name-' . $locale->language, old('name-' . $locale->language, $project->translate($locale->language)->name), ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
-                            {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language, $project->translate($locale->language)->description), ['class' => 'form-control tinymce']) !!}
+                            {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language, $project->translate($locale->language)->description), ['class' => 'form-control tinymce']) !!}
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div class="form-group{!! $errors->has('year')? ' has-error' : '' !!}">
                     {!! Form::label('year', trans('projects::admin.projects_edit_year'), ['class' => 'control-label']) !!}
-                    {!! Form::text('year', Input::old('year', $project->year), ['class' => 'form-control']) !!}
+                    {!! Form::text('year', old('year', $project->year), ['class' => 'form-control']) !!}
                 </div>
                 @if($partnersExtensionEnabled)
                 <div class="form-group{!! $errors->has('partner')? ' has-error' : '' !!}">
                     {!! Form::label('partner', trans('projects::admin.projects_edit_partner'), ['class' => 'control-label']) !!}
-                    {!! Form::select('partner', [0 => __('projects::admin.projects_edit_partner_select')] + $partners, Input::old('partner', $project->partner_id), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('partner', [0 => __('projects::admin.projects_edit_partner_select')] + $partners, old('partner', $project->partner_id), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 @endif
                 

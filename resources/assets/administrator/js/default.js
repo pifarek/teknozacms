@@ -8,7 +8,7 @@ import 'tinymce/plugins/link/plugin'
 import 'tinymce/plugins/autoresize/plugin'
 
 // Make Morris working
-let makeMorris = require('morris-js-module')
+let makeMorris = require('morris-js-module');
 let Morris = makeMorris(jQuery);
 
 // Set the default datetimepicker language

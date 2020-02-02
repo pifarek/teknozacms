@@ -6,6 +6,7 @@ use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\News\Models\News;
 use App\Extensions\News\Models\Category;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -40,9 +41,9 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
-        $locales = Locale::find(\Input::get('locales'));
+        $locales = Locale::find($request->get('locales'));
         
         if(!$locales) {
             return redirect()->back()->withErrors(new \Illuminate\Support\MessageBag(['locales' => trans('admin.select_one_language')]))->withInput();
@@ -57,20 +58,20 @@ class IndexController extends BaseController
             $rules['content-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $news = new News;
-        $news->category_id = \Input::get('category')?: NULL;
+        $news->category_id = $request->get('category')?: NULL;
         
         foreach($locales as $locale){
             \App::setLocale($locale->language);
-            $news->title = \Input::get('title-' . $locale->language);
-            $news->slug = \Input::get('title-' . $locale->language);
-            $news->content = \Input::get('content-' . $locale->language);
+            $news->title = $request->get('title-' . $locale->language);
+            $news->slug = $request->get('title-' . $locale->language);
+            $news->content = $request->get('content-' . $locale->language);
         }
         \App::setLocale($this->administratorLocale);
 
@@ -124,14 +125,14 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function update($news_id)
+    public function update(Request $request, $news_id)
     {
         $news = News::find($news_id);
         if(!$news){
             return redirect('administrator/news');
         }
         
-        $locales = Locale::find(\Input::get('locales'));
+        $locales = Locale::find($request->get('locales'));
         
         if(!$locales){
             return redirect()->back()->withErrors(new \Illuminate\Support\MessageBag(['locales' => trans('admin.select_one_language')]))->withInput();
@@ -146,7 +147,7 @@ class IndexController extends BaseController
             $rules['content-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -155,22 +156,22 @@ class IndexController extends BaseController
         if(\Auth::user()->group_id && \Auth::user()->group->news_category_id){
             $news->category_id = \Auth::user()->group->news_category_id;
         }else{
-            $news->category_id = \Input::get('category')?: NULL;
+            $news->category_id = $request->get('category')?: NULL;
         }
         
         $news->translations()->delete();
         
         foreach($locales as $locale) {
             \App::setLocale($locale->language);
-            $news->title = \Input::get('title-' . $locale->language);
-            $news->slug = \Input::get('title-' . $locale->language);
-            $news->content = \Input::get('content-' . $locale->language);
+            $news->title = $request->get('title-' . $locale->language);
+            $news->slug = $request->get('title-' . $locale->language);
+            $news->content = $request->get('content-' . $locale->language);
         }
 
         \App::setLocale($this->administratorLocale);
 
-        $news->album_id = \Input::get('album')? \Input::get('album') : NULL;
-        $news->created_at = date('Y-m-d H:i:s', strtotime(\Input::get('date')));
+        $news->album_id = $request->get('album')? $request->get('album') : NULL;
+        $news->created_at = date('Y-m-d H:i:s', strtotime($request->get('date')));
         $news->save();
         
         return redirect('administrator/news')->with('success', __('news::admin.msg_updated'));

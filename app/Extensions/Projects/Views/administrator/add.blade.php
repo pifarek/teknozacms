@@ -33,10 +33,10 @@
                         <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('name-' . $locale->language, __('projects::admin.projects_add_name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
-                                {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language), ['class' => 'form-control tinymce']) !!}
+                                {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language), ['class' => 'form-control tinymce']) !!}
                             </div>
                         </div>
                         @endforeach
@@ -44,7 +44,7 @@
                 
                     <div class="form-group{!! $errors->has('year')? ' has-error' : '' !!}">
                         {!! Form::label('year', __('projects::admin.projects_edit_year'), ['class' => 'control-label']) !!}
-                        {!! Form::text('year', Input::old('year'), ['class' => 'form-control']) !!}
+                        {!! Form::text('year', old('year'), ['class' => 'form-control']) !!}
                     </div>
                 
                     <div class="form-group">

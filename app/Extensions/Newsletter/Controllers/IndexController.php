@@ -5,6 +5,7 @@ namespace App\Extensions\Newsletter\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Newsletter\Models\User as NewsletterUser;
 use App\Extensions\Newsletter\Models\Group as NewsletterGroup;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -32,21 +33,21 @@ class IndexController extends BaseController
         return view('Newsletter.Views.administrator.add', ['groups' => $groups]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [
             'email' => ['required', 'email']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $newsletter = new NewsletterUser;
-        $newsletter->email = \Input::get('email');
-        $newsletter->group_id = \Input::get('group')? \Input::get('group') : NULL;
+        $newsletter->email = $request->get('email');
+        $newsletter->group_id = $request->get('group')? $request->get('group') : NULL;
         $newsletter->save();
         
         return redirect('administrator/newsletter')->with('success', trans('newsletter::admin.msg_added'));
@@ -70,7 +71,7 @@ class IndexController extends BaseController
         return view('Newsletter.Views.administrator.edit', ['newsletter' => $newsletter, 'groups' => $groups]);
     }
     
-    public function update($newsletter_id)
+    public function update(Request $request, $newsletter_id)
     {
         $newsletter = NewsletterUser::find($newsletter_id);
         if(!$newsletter){
@@ -81,14 +82,14 @@ class IndexController extends BaseController
             'email' => ['required', 'email']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $newsletter->email = \Input::get('email');
-        $newsletter->group_id = \Input::get('group')? \Input::get('group') : NULL;
+        $newsletter->email = $request->get('email');
+        $newsletter->group_id = $request->get('group')? $request->get('group') : NULL;
         $newsletter->save();
         
         return redirect('administrator/newsletter')->with('success', trans('newsletter::admin.msg_updated'));
@@ -115,19 +116,20 @@ class IndexController extends BaseController
         return view('Newsletter.Views.administrator.group-add');
     }
     
-    public function postGroupAdd(){
+    public function postGroupAdd(Request $request)
+    {
         $rules = [
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $group = new NewsletterGroup;
-        $group->name = \Input::get('name');
+        $group->name = $request->get('name');
         $group->save();
         
         return redirect('administrator/newsletter/group-edit/' . $group->id)->with('success', trans('newsletter::admin.msg_group_added'));
@@ -148,7 +150,8 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function postGroupEdit($group_id){
+    public function postGroupEdit(Request $request, $group_id)
+    {
         $group = NewsletterGroup::find($group_id);
         if(!$group){
             return redirect('administrator/newsletter/groups');
@@ -158,13 +161,13 @@ class IndexController extends BaseController
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $group->name = \Input::get('name');
+        $group->name = $request->get('name');
         $group->save();
         
         return redirect('administrator/newsletter/group-edit/' . $group->id)->with('success', trans('newsletter::admin.msg_group_updated'));

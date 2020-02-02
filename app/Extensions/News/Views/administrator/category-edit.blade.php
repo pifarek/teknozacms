@@ -35,7 +35,7 @@
                         <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('name-' . $locale->language, trans('news::admin.news_category_edit_name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language, $category->translate($locale->language)->name), ['class' => 'form-control']) !!}
+                                {!! Form::text('name-' . $locale->language, old('name-' . $locale->language, $category->translate($locale->language)->name), ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @endforeach

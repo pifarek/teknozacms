@@ -61,8 +61,8 @@ class News extends Main
             
             return redirect('/');
         }else{
-            $search_string = \Input::get('search_string');
-            $search_category = \Input::get('search_category');
+            $search_string = request()->get('search_string');
+            $search_category = request()->get('search_category');
             
             // Here we will display news list
             $query = NewsModel::query();

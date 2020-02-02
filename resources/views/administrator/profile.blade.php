@@ -38,11 +38,11 @@
                 
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('name', __('admin.profile_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name', $user->name), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name', $user->name), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('surname', __('admin.profile_surname'), ['class' => 'control-label']) !!}
-                        {!! Form::text('surname', Input::old('surname', $user->surname), ['class' => 'form-control']) !!}
+                        {!! Form::text('surname', old('surname', $user->surname), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('password')? ' has-error' : '' !!}">
                         {!! Form::label('password', __('admin.profile_password'), ['class' => 'control-label']) !!}

@@ -3,9 +3,10 @@
 namespace App\Extensions\Projects\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Tag extends Model
+class Tag extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -16,10 +17,5 @@ class Tag extends Model
     /**
      * @var array
      */
-    protected $translatable = ['name'];
-    
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Projects\Models\TagTranslation::class);
-    }
+    protected $translatedAttributes = ['name'];
 }

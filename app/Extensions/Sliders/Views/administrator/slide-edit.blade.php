@@ -52,11 +52,11 @@
                         <div role="tabpanel" class="tab-pane{!! findLocale($slide, $locale->id)? '' : ' d-none' !!}" id="locale-{{ $locale->id }}" data-locale="{{ $locale->id }}">
                             <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('name-' . $locale->language, trans('sliders::admin.slide_edit_name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->name : ''), ['class' => 'form-control']) !!}
+                                {!! Form::text('name-' . $locale->language, old('name-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->name : ''), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('description-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('description-' . $locale->language, trans('sliders::admin.slide_edit_description'), ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description-' . $locale->language, Input::old('description-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->description : ''), ['class' => 'form-control']) !!}
+                                {!! Form::textarea('description-' . $locale->language, old('description-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->description : ''), ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @endforeach
@@ -65,11 +65,11 @@
 
                 <div class="form-group{!! $errors->has('slider')? ' has-error' : '' !!}">
                     {!! Form::label('slider', trans('sliders::admin.slide_edit_slider'), ['class' => 'control-label']) !!}
-                    {!! Form::select('slider', $sliders, Input::old('slider', $slide->slider_id), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('slider', $sliders, old('slider', $slide->slider_id), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 <div class="form-group{!! $errors->has('url')? ' has-error' : '' !!}">
                     {!! Form::label('url', trans('sliders::admin.slide_edit_url'), ['class' => 'control-label']) !!}
-                    {!! Form::text('url', Input::old('url', $slide->url), ['class' => 'form-control']) !!}
+                    {!! Form::text('url', old('url', $slide->url), ['class' => 'form-control']) !!}
                 </div>
                 <div class="slide-url d-none">
                     <div class="languages-selector">
@@ -85,7 +85,7 @@
                                 <div role="tabpanel" class="tab-pane" id="url-locale-{{ $locale->id }}" data-locale="{{ $locale->id }}">
                                     <div class="form-group{!! $errors->has('button-' . $locale->language)? ' has-error' : '' !!}">
                                         {!! Form::label('button-' . $locale->language, trans('sliders::admin.slide_edit_button'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('button-' . $locale->language, Input::old('button-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->button_label : ''), ['class' => 'form-control']) !!}
+                                        {!! Form::text('button-' . $locale->language, old('button-' . $locale->language, $slide->translate($locale->language)? $slide->translate($locale->language)->button_label : ''), ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                             @endforeach
@@ -99,16 +99,16 @@
                 </div>
                 <div class="form-group{!! $errors->has('available_date')? ' has-error' : '' !!}">
                     {!! Form::label('available_date', trans('sliders::admin.slide_edit_available'), ['class' => 'control-label']) !!}
-                    {!! Form::select('available_date', [0 => trans('sliders::admin.slide_edit_available_0'), 1 => trans('sliders::admin.slide_edit_available_1')], Input::old('available_date', $slide->available_date), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('available_date', [0 => trans('sliders::admin.slide_edit_available_0'), 1 => trans('sliders::admin.slide_edit_available_1')], old('available_date', $slide->available_date), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 <div class="available-date d-none">
                     <div class="form-group{!! $errors->has('start_date')? ' has-error' : '' !!}">
                         {!! Form::label('start_date', trans('sliders::admin.slide_edit_start'), ['class' => 'control-label']) !!}
-                        {!! Form::text('start_date', Input::old('start_date', date('d-m-Y H:i:s', $slide->start_date)), ['class' => 'form-control']) !!}
+                        {!! Form::text('start_date', old('start_date', date('d-m-Y H:i:s', $slide->start_date)), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('end_date')? ' has-error' : '' !!}">
                         {!! Form::label('end_date', trans('sliders::admin.slide_edit_end'), ['class' => 'control-label']) !!}
-                        {!! Form::text('end_date', Input::old('end_date', date('d-m-Y H:i:s', $slide->end_date)), ['class' => 'form-control']) !!}
+                        {!! Form::text('end_date', old('end_date', date('d-m-Y H:i:s', $slide->end_date)), ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 

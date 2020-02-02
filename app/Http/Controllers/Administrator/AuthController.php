@@ -7,6 +7,7 @@ use App\Mail\resetAdministratorPassword;
 use App\Models\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -25,27 +26,27 @@ class AuthController extends Controller
         return view('administrator.auth.login');
     }
     
-    public function login()
+    public function login(Request $request)
     {
         $rules = [
             'email' => ['required', 'email'],
             'password' => ['required']
         ];
 
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withInput()->withErrors($validation->errors());
         }
 
         $params = [
-            'email' => \Input::get('email'),
-            'password' => \Input::get('password')
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
         ];
 
         // Find a administrator user
-        if(Administrator::where('email', '=', \Input::get('email'))->first()){
-            if(\Auth::guard('administrator')->attempt($params, (bool)\Input::get('remember'))){
+        if(Administrator::where('email', '=', $request->get('email'))->first()){
+            if(\Auth::guard('administrator')->attempt($params, (bool) $request->get('remember'))){
                 return redirect()->intended('administrator');
             }else{
                 return redirect()->back()->withInput();
@@ -70,7 +71,7 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'exists:administrators,email']
         ];
 
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
@@ -79,7 +80,7 @@ class AuthController extends Controller
         $user = Administrator::where('email', $request->get('email'))->get()->first();
 
         // Generate reset token
-        $reset_token = str_random(30);
+        $reset_token = Str::random(30);
 
         // Save the user's reset token
         $user->reset_token = $reset_token;
@@ -99,7 +100,7 @@ class AuthController extends Controller
         }
 
         // generate random new password
-        $new_password = str_random();
+        $new_password = Str::random();
 
         // clear reset token
         $user->reset_token = '';

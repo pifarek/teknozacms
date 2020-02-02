@@ -5,12 +5,14 @@ namespace App\Extensions\Events\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Models\Locale;
 use App\Extensions\Events\Models\Event;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IndexController extends BaseController
 {
     /**
      * Display list of news
-     * @return type
+     * @return View
      */
     public function index()
     {
@@ -22,14 +24,14 @@ class IndexController extends BaseController
     
     /**
      * Add a new event
-     * @return type
+     * @return View
      */
     public function create()
     {
         return view('Events.Views.administrator.add', ['locales' => Locale::all()]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [];
         
@@ -37,7 +39,7 @@ class IndexController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -47,7 +49,7 @@ class IndexController extends BaseController
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $event->name = \Input::get('name-' . $locale->language);
+            $event->name = $request->get('name-' . $locale->language);
         }
 
         \App::setLocale($this->administratorLocale);
@@ -75,10 +77,11 @@ class IndexController extends BaseController
     
     /**
      * Edit a selected event
+     * @param $request
      * @param int $event_id
      * @return response
      */
-    public function update($event_id)
+    public function update(Request $request, $event_id)
     {
         $event = Event::find($event_id);
         if(!$event) {
@@ -89,7 +92,7 @@ class IndexController extends BaseController
             'status' => ['required', 'numeric', 'min:0', 'max:1']
         ];
         
-        if(\Input::get('register') == 1){
+        if($request->get('register') == 1){
             $rules += [
                 'tickets' => ['required', 'numeric'],
                 'guests' => ['required', 'numeric', 'max:5']
@@ -100,22 +103,22 @@ class IndexController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $event->url = \Input::get('url');
-        $event->start_time = strtotime(\Input::get('start'));
-        $event->end_time = strtotime(\Input::get('end'));
-        $event->address = \Input::get('address');
-        $event->status = \Input::get('status');
+        $event->url = $request->get('url');
+        $event->start_time = strtotime($request->get('start'));
+        $event->end_time = strtotime($request->get('end'));
+        $event->address = $request->get('address');
+        $event->status = $request->get('status');
 
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $event->name = \Input::get('name-' . $locale->language);
-            $event->description = \Input::get('description-' . $locale->language);
+            $event->name = $request->get('name-' . $locale->language);
+            $event->description = $request->get('description-' . $locale->language);
         }
         
         $event->save();

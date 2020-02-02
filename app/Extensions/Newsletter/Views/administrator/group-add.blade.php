@@ -25,7 +25,7 @@
                 {!! Form::open(['class' => 'form-floating', 'url' => url('administrator/newsletter/groups')]) !!}
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('name', trans('newsletter::admin.group_add_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name'), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.group_add_submit') }}</button>

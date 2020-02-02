@@ -5,6 +5,7 @@ namespace App\Extensions\Projects\Controllers;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Projects\Models\Tag;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class TagsController extends BaseController
 {
@@ -28,7 +29,7 @@ class TagsController extends BaseController
         return view('Projects.Views.administrator.tag-add', ['locales' => Locale::all()]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [];
         
@@ -36,7 +37,7 @@ class TagsController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -46,7 +47,7 @@ class TagsController extends BaseController
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $tag->name = \Input::get('name-' . $locale->language);
+            $tag->name = $request->get('name-' . $locale->language);
         }
         
         $tag->save();
@@ -71,7 +72,7 @@ class TagsController extends BaseController
         ]);
     }
     
-    public function update($tag_id)
+    public function update(Request $request, $tag_id)
     {
         $tag = Tag::find($tag_id);
         if(!$tag){
@@ -84,7 +85,7 @@ class TagsController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -92,7 +93,7 @@ class TagsController extends BaseController
         
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $tag->name = \Input::get('name-' . $locale->language);
+            $tag->name = $request->get('name-' . $locale->language);
         }
         
         $tag->save();

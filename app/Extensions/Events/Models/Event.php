@@ -3,25 +3,21 @@
 namespace App\Extensions\Events\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Event extends Model
+class Event extends Model implements TranslatableContract
 {
     use Translatable;
 
     protected $table = 'events';
 
-    /**
-     * @var string
-     */
-    protected $translator = 'App\Models\Events\EventTranslation';
+    protected $translatedAttributes = ['name', 'description', 'ticket_description'];
 
     /**
-     * @var array
+     * @return bool|void|null
+     * @throws \Exception
      */
-    protected $translatable = ['name', 'description', 'ticket_description'];
-
-    
     public function delete()
     {
         if($this->filename) {
@@ -32,6 +28,7 @@ class Event extends Model
     
     /**
      * Get event month
+     * @return string
      */
     public function month(){
         \App::setLocale($this->locale);
@@ -40,16 +37,11 @@ class Event extends Model
     
     /**
      * Get event day
-     * @return type
+     * @return string
      */
     public function day()
     {
         return (new \Date())->setTimestamp($this->start_time)->format('d');
-    }
-    
-    public function translations()
-    {
-        return $this->hasMany(EventTranslation::class);
     }
     
     public function users()

@@ -8,6 +8,4 @@ class SlideTranslation extends Model
     protected $table = 'slides_translations';
     
     public $timestamps = false;
-    
-    protected $guarded = ['_token', '_method'];
 }

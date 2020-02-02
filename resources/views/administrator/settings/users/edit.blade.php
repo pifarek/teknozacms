@@ -28,7 +28,7 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                     <div class="form-group{!! $errors->has('email')? ' has-error' : '' !!}">
                         {!! Form::label('email', __('admin.settings_users_edit_email'), ['class' => 'control-label']) !!}
-                        {!! Form::text('email', Input::old('email', $user->email), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                        {!! Form::text('email', old('email', $user->email), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('password')? ' has-error' : '' !!}">
                         {!! Form::label('password', __('admin.settings_users_edit_password'), ['class' => 'control-label']) !!}

@@ -16,7 +16,7 @@
             </h3>
 
             <p>
-                {{ str_limit(strip_tags($event->description), 200) }}
+                {{ Str::limit(strip_tags($event->description), 200) }}
             </p>
 
         <div style="height: 40px;">

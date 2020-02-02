@@ -30,7 +30,7 @@
                 {{ method_field('PUT') }}
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('name', trans('newsletter::admin.group_edit_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name', $group->name), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name', $group->name), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.group_edit_submit') }}</button>

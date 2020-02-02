@@ -58,7 +58,7 @@
                                     @foreach($news as $single)
                                     <li class="news-element" data-type="news" data-id="{{ $single->id }}">
                                         <h4>{{ $single->title }}</h4>
-                                        <p>{{ str_limit(strip_tags($single->description), 100) }}</p>
+                                        <p>{{ \Illuminate\Support\Str::limit(strip_tags($single->description), 100) }}</p>
                                     </li>
                                     @endforeach
                                     @endif
@@ -70,7 +70,7 @@
                                     @foreach($events as $event)
                                     <li class="event-element" data-type="event" data-id="{{ $event->id }}">
                                         <h4>{{ $event->title }}</h4>
-                                        <p>{{ str_limit(strip_tags($event->description), 100) }}</p>
+                                        <p>{{ \Illuminate\Support\Str::limit(strip_tags($event->description), 100) }}</p>
                                     </li>
                                     @endforeach
                                     @endif
@@ -91,7 +91,7 @@
                 {!! Form::open(['class' => 'form-floating step2']) !!}
                 <div class="form-group{!! $errors->has('type')? ' has-error' : '' !!}">
                     {!! Form::label('type', trans('newsletter::admin.send_content_type'), ['class' => 'control-label']) !!}
-                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_content_type_users'), 'groups' => trans('newsletter::admin.send_content_type_groups')], Input::old('type'), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('type', ['users' => trans('newsletter::admin.send_content_type_users'), 'groups' => trans('newsletter::admin.send_content_type_groups')], old('type'), ['class' => 'form-control selectpicker']) !!}
                 </div>
                 <div class="users-list-container">
                     @if($users->count())
@@ -125,11 +125,11 @@
                 </div>
                 <div class="form-group{!! $errors->has('subject')? ' has-error' : '' !!}">
                     {!! Form::label('subject', trans('newsletter::admin.send_content_subject'), ['class' => 'control-label']) !!}
-                    {!! Form::text('subject', Input::old('subject'), ['class' => 'form-control']) !!}
+                    {!! Form::text('subject', old('subject'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group tinymce{!! $errors->has('content')? ' has-error' : '' !!}">
                     {!! Form::label('content', trans('newsletter::admin.send_content_message'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('content', Input::old('content'), ['class' => 'form-control tinymce']) !!}
+                    {!! Form::textarea('content', old('content'), ['class' => 'form-control tinymce']) !!}
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.send_content_submit2') }}</button>

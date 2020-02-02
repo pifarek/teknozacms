@@ -25,7 +25,7 @@
                 {!! Form::open(['class' => 'form-floating', 'url' => url('administrator/sliders')]) !!}
                     <div class="form-group{!! $errors->has('short')? ' has-error' : '' !!}">
                         {!! Form::label('short', trans('sliders::admin.add_shortcode'), ['class' => 'control-label']) !!}
-                        {!! Form::text('short', Input::old('short'), ['class' => 'form-control']) !!}
+                        {!! Form::text('short', old('short'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('sliders::admin.add_page_title') }}</button>

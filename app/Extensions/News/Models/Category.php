@@ -2,9 +2,10 @@
 namespace App\Extensions\News\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Category extends Model
+class Category extends Model implements TranslatableContract
 {
     use Translatable;
     
@@ -12,12 +13,5 @@ class Category extends Model
     
     public $timestamps = false;
 
-    protected $guarded = ['_token', '_method'];
-
-    protected $translatable = ['name'];
-
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\News\Models\CategoryTranslation::class);
-    }
+    protected $translatedAttributes = ['name'];
 }

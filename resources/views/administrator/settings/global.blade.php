@@ -47,7 +47,7 @@
                             @if($setting['type'] === 'text')
 
                             {!! Form::label('setting-' . $setting['name'] . '-' . $locale->language, $setting['label'], ['class' => 'control-label']) !!}
-                            {!! Form::text('setting-' . $setting['name'] . '-' . $locale->language, Input::old('setting-' . $setting['name'] . '-' . $locale->language, Settings::get($setting['name'], $locale->id)), ['class' => 'form-control']) !!}
+                            {!! Form::text('setting-' . $setting['name'] . '-' . $locale->language, old('setting-' . $setting['name'] . '-' . $locale->language, Settings::get($setting['name'], $locale->id)), ['class' => 'form-control']) !!}
 
                             @elseif($field->type === 'textarea')
 
@@ -67,7 +67,7 @@
 
                     @if($setting['type'] === 'text')
                     {!! Form::label('setting-' . $setting['name'], $setting['label'], ['class' => 'control-label']) !!}
-                    {!! Form::text('setting-' . $setting['name'], Input::old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control']) !!}
+                    {!! Form::text('setting-' . $setting['name'], old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control']) !!}
                     @elseif($setting['type'] === 'password')
                     {!! Form::label('setting-' . $setting['name'], $setting['label'], ['class' => 'control-label']) !!}
                     {!! Form::password('setting-' . $setting['name'], ['class' => 'form-control']) !!}
@@ -83,10 +83,10 @@
                     </div>
                     @elseif($setting['type'] === 'datetime')
                     {!! Form::label('setting-' . $setting['name'], $setting['label'], ['class' => 'control-label']) !!}
-                    {!! Form::text('setting-' . $setting['name'], Input::old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control datetimepicker']) !!}
+                    {!! Form::text('setting-' . $setting['name'], old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control datetimepicker']) !!}
                     @elseif($setting['type'] === 'select')
                     {!! Form::label('setting-' . $setting['name'], $setting['label'], ['class' => 'control-label']) !!}
-                    {!! Form::select('setting-' . $setting['name'], $setting['options'], Input::old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('setting-' . $setting['name'], $setting['options'], old($setting['name'], Settings::get($setting['name'])), ['class' => 'form-control selectpicker']) !!}
                     @endif
                 </div>
                 @endif

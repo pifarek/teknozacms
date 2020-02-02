@@ -24,7 +24,7 @@ class IndexController extends BaseController
     /*
      * Display global settings
      */
-    public function postGlobal()
+    public function postGlobal(Request $request)
     {
         $settings = $this->settings;
         
@@ -42,7 +42,7 @@ class IndexController extends BaseController
             }
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -56,7 +56,7 @@ class IndexController extends BaseController
                             'name' => $setting['name'],
                             'locale_id' => $locale->id
                         ]);
-                        $db_settings->value = \Input::get('setting-' . $setting['name'] . '-' . $locale->language)?: NULL;
+                        $db_settings->value = $request->get('setting-' . $setting['name'] . '-' . $locale->language)?: NULL;
                         $db_settings->save();
                     }
                 }else{
@@ -64,7 +64,7 @@ class IndexController extends BaseController
                         'name' => $setting['name'],
                         'locale_id' => NULL                        
                     ]);
-                    $db_settings->value = \Input::get('setting-' . $setting['name'])?: NULL;
+                    $db_settings->value = $request->get('setting-' . $setting['name'])?: NULL;
                     $db_settings->save();
                 }
             }
@@ -95,22 +95,22 @@ class IndexController extends BaseController
     /*
      * Add a new user
      */
-    public function postUserAdd()
+    public function postUserAdd(Request $request)
     {
         $rules = [
             'email' => ['required', 'email', 'unique:administrators,email'],
             'password' => ['required', 'confirmed', 'min:6']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){            
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
 
         $user = new Administrator;
-        $user->email = \Input::get('email');
-        $user->password = bcrypt(\Input::get('password'));
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
         $user->locale = \App::getLocale();
         $user->save();
         
@@ -128,7 +128,7 @@ class IndexController extends BaseController
         return view('administrator.settings.users/edit', ['user' => $user]);
     }
     
-    public function postUserEdit($user_id)
+    public function postUserEdit(Request $request, $user_id)
     {
         $user = Administrator::find($user_id);
         if(!$user)
@@ -140,16 +140,16 @@ class IndexController extends BaseController
             'password' => ['confirmed', 'min:6']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails())
         {            
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        if(\Input::get('password'))
+        if($request->get('password'))
         {
-            $user->password = bcrypt(\Input::get('password'));
+            $user->password = bcrypt($request->get('password'));
         }
         $user->save();
         
@@ -175,22 +175,22 @@ class IndexController extends BaseController
         return view('administrator.settings.locales/add');
     }
     
-    public function postLocaleAdd()
+    public function postLocaleAdd(Request $request)
     {
         $rules = [
             'name' => ['required'],
             'language' => ['required', 'min:2', 'max:2', 'unique:locales,language']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $locale = new Locale;
-        $locale->language = \Input::get('language');
-        $locale->name = \Input::get('name');
+        $locale->language = $request->get('language');
+        $locale->name = $request->get('name');
         $locale->save();
         
         $this->createTranslationsFiles($locale->language);

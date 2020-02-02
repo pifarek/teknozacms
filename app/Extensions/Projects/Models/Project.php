@@ -3,9 +3,10 @@
 namespace App\Extensions\Projects\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Project extends Model
+class Project extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -16,26 +17,21 @@ class Project extends Model
     /**
      * @var array
      */
-    protected $translatable = ['name', 'description'];
-    
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Projects\Models\ProjectTranslation::class);
-    }
+    protected $translatedAttributes = ['name', 'description'];
     
     public function tags()
     {
-        return $this->belongsToMany(\App\Extensions\Projects\Models\Tag::class, 'projects_tag_project');
+        return $this->belongsToMany(Tag::class, 'projects_tag_project');
     }
     
     public function images()
     {
-        return $this->hasMany(\App\Extensions\Projects\Models\Image::class);
+        return $this->hasMany(Image::class);
     }
     
     public function partner()
     {
-        return $this->belongsTo(\App\Extensions\Projects\Models\Partner::class);
+        return $this->belongsTo(\App\Extensions\Partners\Models\Partner::class);
     }
     
     public function delete()

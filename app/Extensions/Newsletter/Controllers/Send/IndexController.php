@@ -5,6 +5,7 @@ namespace App\Extensions\Newsletter\Controllers\Send;
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Newsletter\Models\User as NewsletterUser;
 use App\Extensions\Newsletter\Models\Group as NewsletterGroup;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -16,19 +17,19 @@ class IndexController extends BaseController
         return view('Newsletter.Views.administrator.send.index');
     }
     
-    public function postIndex()
+    public function postIndex(Request $request)
     {
         $rules = [
             'newsletter_type' => ['required', 'in:option_1,option_2,option_3']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        switch(\Input::get('newsletter_type')){
+        switch($request->get('newsletter_type')){
             case 'option_1': return redirect('administrator/newsletter/send/greetings');
             case 'option_2': return redirect('administrator/newsletter/send/content');
             case 'option_3': return redirect('administrator/newsletter/send/empty');
@@ -54,7 +55,7 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function sendGreetings()
+    public function sendGreetings(Request $request)
     {
         $rules = [
             'type' => ['required', 'in:users,groups'],
@@ -62,21 +63,21 @@ class IndexController extends BaseController
             'image' => ['required', 'image']
         ];
         
-        if(\Input::get('type') == 'users'){
+        if($request->get('type') == 'users'){
             $rules['users'] = ['required', 'array'];
         }else{
             $rules['groups'] = ['required', 'array'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $subject = \Input::get('subject');
+        $subject = $request->get('subject');
         
-        $image = \Input::file('image');
+        $image = $request->file('image');
         
         $filename = uniqid(null, true) . '.jpg';
         
@@ -84,11 +85,11 @@ class IndexController extends BaseController
             $constraint->aspectRatio();
         })->save('upload/newsletter/' . $filename);
         
-        if(\Input::get('type') == 'users'){
-            $users_id = \Input::get('users');
+        if($request->get('type') == 'users'){
+            $users_id = $request->get('users');
             $users = NewsletterUser::find($users_id);
         }else{
-            $groups_id = \Input::get('groups');
+            $groups_id = $request->get('groups');
             $groups = NewsletterGroup::find($groups_id);
             $users = collect();
             if($groups->count()){
@@ -191,7 +192,7 @@ class IndexController extends BaseController
         }
     }
     
-    public function sendContent()
+    public function sendContent(Request $request)
     {
         $sessionElements = \Session::get('newsletter_elements');
         
@@ -202,25 +203,25 @@ class IndexController extends BaseController
                 'content' => ['required'],
             ];
 
-            if(\Input::get('type') == 'users'){
+            if($request->get('type') == 'users'){
                 $rules['users'] = ['required', 'array'];
             }else{
                 $rules['groups'] = ['required', 'array'];
             }
 
-            $validation = \Validator::make(\Input::all(), $rules);
+            $validation = \Validator::make($request->all(), $rules);
 
             if($validation->fails()) {
                 return redirect()->back()->withErrors($validation->errors())->withInput();
             }
 
-            $subject = \Input::get('subject');
+            $subject = $request->get('subject');
 
-            if(\Input::get('type') == 'users'){
-                $users_id = \Input::get('users');
+            if($request->get('type') == 'users'){
+                $users_id = $request->get('users');
                 $users = NewsletterUser::find($users_id);
             }else{
-                $groups_id = \Input::get('groups');
+                $groups_id = $request->get('groups');
                 $groups = NewsletterGroup::find($groups_id);
                 $users = collect();
                 if($groups->count()){
@@ -260,7 +261,7 @@ class IndexController extends BaseController
             if($users->count()){
                 foreach($users as $user){
                     $data = [
-                        'description' => \Input::get('content'),
+                        'description' => $request->get('content'),
                         'content' => $buildContent,
                         'user' => $user
                     ];
@@ -292,7 +293,7 @@ class IndexController extends BaseController
         ]);
     }
     
-    public function sendEmpty()
+    public function sendEmpty(Request $request)
     {
         $rules = [
             'type' => ['required', 'in:users,groups'],
@@ -300,25 +301,25 @@ class IndexController extends BaseController
             'content' => ['required'],
         ];
         
-        if(\Input::get('type') == 'users'){
+        if($request->get('type') == 'users'){
             $rules['users'] = ['required', 'array'];
         }else{
             $rules['groups'] = ['required', 'array'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $subject = \Input::get('subject');
+        $subject = $request->get('subject');
         
-        if(\Input::get('type') == 'users'){
-            $users_id = \Input::get('users');
+        if($request->get('type') == 'users'){
+            $users_id = $request->get('users');
             $users = NewsletterUser::find($users_id);
         }else{
-            $groups_id = \Input::get('groups');
+            $groups_id = $request->get('groups');
             $groups = NewsletterGroup::find($groups_id);
             $users = collect();
             if($groups->count()){
@@ -336,7 +337,7 @@ class IndexController extends BaseController
         {
             foreach($users as $user){
                 $data = [
-                    'content' => \Input::get('content'),
+                    'content' => $request->get('content'),
                     'user' => $user
                 ];
                 \Mail::send('Newsletter.Views.email.empty-template', $data, function($mail) use ($user, $subject){

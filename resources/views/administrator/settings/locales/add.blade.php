@@ -24,11 +24,11 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                     <div class="form-group{!! $errors->has('name')? ' has-error' : '' !!}">
                         {!! Form::label('name', trans('admin.settings_locale_add_name'), ['class' => 'control-label']) !!}
-                        {!! Form::text('name', Input::old('name'), ['class' => 'form-control']) !!}
+                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('language')? ' has-error' : '' !!}">
                         {!! Form::label('language', trans('admin.settings_locale_add_code'), ['class' => 'control-label']) !!}
-                        {!! Form::text('language', Input::old('language'), ['class' => 'form-control']) !!}
+                        {!! Form::text('language', old('language'), ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">

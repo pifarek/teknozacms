@@ -37,7 +37,7 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                     <div class="form-group{!! $errors->has('tag')? ' has-error' : '' !!}">
                         {!! Form::label('tag', trans('admin.settings_emails_edit_tag'), ['class' => 'control-label']) !!}
-                        <input type="text" name="tag" id="tag" class="form-control" value="{{ Input::old('tag', $email->tag) }}"{!! $email->isStatic()? ' disabled="disabled"' : '' !!}>
+                        <input type="text" name="tag" id="tag" class="form-control" value="{{ old('tag', $email->tag) }}"{!! $email->isStatic()? ' disabled="disabled"' : '' !!}>
                     </div>
                 
                     <ul class="nav nav-tabs" role="tablist">
@@ -51,11 +51,11 @@
                         <div role="tabpanel" class="tab-pane" id="tab-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('subject-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('subject-' . $locale->language, trans('admin.settings_emails_edit_subject'), ['class' => 'control-label']) !!}
-                                {!! Form::text('subject-' . $locale->language, Input::old('subject', $email->translate($locale->language)->subject), ['class' => 'form-control']) !!}
+                                {!! Form::text('subject-' . $locale->language, old('subject', $email->translate($locale->language)->subject), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('tag-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('content-' . $locale->language, trans('admin.settings_emails_edit_content'), ['class' => 'control-label']) !!}
-                                {!! Form::textarea('content-' . $locale->language, Input::old('content', $email->translate($locale->language)->content), ['class' => 'form-control']) !!}
+                                {!! Form::textarea('content-' . $locale->language, old('content', $email->translate($locale->language)->content), ['class' => 'form-control']) !!}
                                 <span id="helpBlock" class="help-block">
                                     @if(isset($shortcodes[$email->tag]) && sizeof($shortcodes[$email->tag]))
                                     {{ trans('admin.settings_emails_edit_info') }}

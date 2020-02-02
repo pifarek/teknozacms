@@ -4,6 +4,7 @@ namespace App\Extensions\Partners\Controllers;
 
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Partners\Models\Partner;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -27,20 +28,20 @@ class IndexController extends BaseController
         return view('Partners.Views.administrator.add');
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $rules = [
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $partner = new Partner;
-        $partner->name = \Input::get('name');
+        $partner->name = $request->get('name');
         $partner->save();
         
         return redirect('administrator/partners/' . $partner->id . '/edit')->with('success', __('partners::admin.partners_msg_added'));
@@ -59,7 +60,8 @@ class IndexController extends BaseController
         return view('Partners.Views.administrator.edit', ['partner' => $partner]);
     }
     
-    public function update($partner_id){
+    public function update(Request $request, $partner_id)
+    {
         $partner = Partner::find($partner_id);
         if(!$partner){
             return redirect('administrator/partners');
@@ -69,14 +71,14 @@ class IndexController extends BaseController
             'name' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $partner->name = \Input::get('name');
-        $partner->url = \Input::get('url');
+        $partner->name = $request->get('name');
+        $partner->url = $request->get('url');
         $partner->save();
         
         return redirect('administrator/partners')->with('success', __('partners::admin.partners_msg_updated'));

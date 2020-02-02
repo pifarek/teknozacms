@@ -3,9 +3,10 @@
 namespace App\Extensions\Contacts\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Contact extends Model
+class Contact extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -16,10 +17,5 @@ class Contact extends Model
     /**
      * @var array
      */
-    protected $translatable = ['name', 'description'];
-    
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Contacts\Models\ContactTranslation::class);
-    }
+    protected $translatedAttributes = ['name', 'description'];
 }

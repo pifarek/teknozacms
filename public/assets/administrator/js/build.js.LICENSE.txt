@@ -1,0 +1,134 @@
+/* @license
+morris.js v0.5.1
+Copyright 2014 Olly Smith All rights reserved.
+Licensed under the BSD-2-Clause License.
+*/
+
+/*!
+   * jQuery UI Widget 1.12.1
+   * http://jqueryui.com
+   *
+   * Copyright jQuery Foundation and other contributors
+   * Released under the MIT license.
+   * http://jquery.org/license
+   */
+
+/*!
+  * Bootstrap v4.1.1 (https://getbootstrap.com/)
+  * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  */
+
+/*!
+ * Bootstrap-select v1.13.1 (https://developer.snapappointments.com/bootstrap-select)
+ *
+ * Copyright 2012-2018 SnapAppointments, LLC
+ * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
+ */
+
+/*!
+ * Sizzle CSS Selector Engine v2.3.3
+ * https://sizzlejs.com/
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: 2016-08-08
+ */
+
+/*!
+ * jQuery JavaScript Library v3.3.1
+ * https://jquery.com/
+ *
+ * Includes Sizzle.js
+ * https://sizzlejs.com/
+ *
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.org/license
+ *
+ * Date: 2018-01-20T17:24Z
+ */
+
+/*!
+ * jQuery Mousewheel 3.1.13
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Core 1.11.4
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/category/ui-core/
+ */
+
+/*!
+ * jQuery UI Mouse 1.11.4
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/mouse/
+ */
+
+/*!
+ * jQuery UI Widget 1.11.4
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/jQuery.widget/
+ */
+
+/*! jQuery UI - v1.11.4 - 2015-12-21
+* http://jqueryui.com
+* Includes: core.js, widget.js, mouse.js, sortable.js
+* Copyright jQuery Foundation and other contributors; Licensed MIT */
+
+/*! jQuery UI - v1.12.1+CommonJS - 2018-02-10
+ * http://jqueryui.com
+ * Includes: widget.js
+ * Copyright jQuery Foundation and other contributors; Licensed MIT */
+
+/**
+ * @preserve jQuery DateTimePicker
+ * @homepage http://xdsoft.net/jqplugins/datetimepicker/
+ * @author Chupurnov Valeriy (<chupurnov@gmail.com>)
+ */
+
+/**!
+ * @fileOverview Kickass library to create and place poppers near their reference elements.
+ * @version 1.14.3
+ * @license
+ * Copyright (c) 2016 Federico Zivolo and contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */

@@ -3,6 +3,7 @@
 namespace App\Extensions\Menus\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ItemTranslation extends Model
 {
@@ -13,11 +14,11 @@ class ItemTranslation extends Model
     protected $guarded = ['_token', '_method'];
     
     public function item(){
-        return $this->belongsTo(\App\Extensions\Menus\Models\Item::class);
+        return $this->belongsTo(Item::class);
     }
     
     public function setUrlAttribute($value){
-        $slug = str_slug($value);
+        $slug = Str::slug($value);
         $tmp = $slug;
         
         while($check = $this->where('url', '=', $tmp)->where('id', '!=', (int)$this->id)->where('locale', '=', $this->locale)->get()->first()){

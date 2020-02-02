@@ -3,9 +3,10 @@
 namespace App\Extensions\Menus\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class Item extends Model
+class Item extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -13,22 +14,19 @@ class Item extends Model
 
     public $timestamps = false;
 
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\Menus\Models\ItemTranslation::class);
-    }
-
     /**
      * @var array
      */
-    protected $translatable = ['name', 'url', 'route'];
+    protected $translatedAttributes = ['name', 'url', 'route'];
 
-    public function getType(){
+    public function getType()
+    {
         return \App\Helpers\Page::getClass($this->type)->title;
     }
     
-    public function menu(){
-        return $this->belongsTo(\App\Extensions\Menus\Models\Menu::class);
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
     }
     
     /**

@@ -4,6 +4,7 @@ namespace App\Extensions\Partners\Controllers;
 
 use App\Http\Controllers\Administrator\BaseController;
 use App\Extensions\Partners\Models\Partner;
+use Illuminate\Http\Request;
 
 class JsonController extends BaseController
 {
@@ -28,7 +29,7 @@ class JsonController extends BaseController
     /**
      * Upload partner image
      */
-    public function imageUpload($partner_id)
+    public function imageUpload(Request $request, $partner_id)
     {
         $partner = Partner::find($partner_id);
         
@@ -36,7 +37,7 @@ class JsonController extends BaseController
             return response()->json(['status' => 'err']);
         }
         
-        $image = \Input::file('image');
+        $image = $request->file('image');
         
         $rules = [
             'image' => ['required', 'image']

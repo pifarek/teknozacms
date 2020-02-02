@@ -43,22 +43,22 @@
                     <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                         <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('name-' . $locale->language, trans('menus::admin.menus_item_edit_name'), ['class' => 'control-label']) !!}
-                            {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language, $item->translate($locale->language)->name), ['class' => 'form-control']) !!}
+                            {!! Form::text('name-' . $locale->language, old('name-' . $locale->language, $item->translate($locale->language)->name), ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group{!! $errors->has('url-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('url-' . $locale->language, trans('menus::admin.menus_item_edit_url'), ['class' => 'control-label']) !!}
-                            {!! Form::text('url-' . $locale->language, Input::old('url-' . $locale->language, $item->translate($locale->language)->url), ['class' => 'form-control', 'placeholder' => trans('menus::admin.menus_item_edit_url_placeholder')]) !!}
+                            {!! Form::text('url-' . $locale->language, old('url-' . $locale->language, $item->translate($locale->language)->url), ['class' => 'form-control', 'placeholder' => trans('menus::admin.menus_item_edit_url_placeholder')]) !!}
                         </div>
                         <div class="form-group{!! $errors->has('route-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('route-' . $locale->language, trans('menus::admin.menus_item_edit_route'), ['class' => 'control-label']) !!}
-                            {!! Form::text('route-' . $locale->language, url('/') . '/' . Input::old('route-' . $locale->language, $item->translate($locale->language)->route), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                            {!! Form::text('route-' . $locale->language, url('/') . '/' . old('route-' . $locale->language, $item->translate($locale->language)->route), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                         </div>
                     </div>
                     @endforeach
                 </div>                        
                 <div class="form-group">
                     {!! Form::label('parent', trans('menus::admin.menus_item_edit_parent'), ['class' => 'control-label']) !!}
-                    {!! Form::select('parent', $parents, Input::old('parent', $item->parent_id), ['class' => 'form-control selectpicker']) !!}
+                    {!! Form::select('parent', $parents, old('parent', $item->parent_id), ['class' => 'form-control selectpicker']) !!}
                 </div>
 
                 <legend>{{ trans('menus::admin.menus_item_edit_more') }}</legend>
@@ -107,15 +107,15 @@
 
                         @if($field->type === 'textarea')
 
-                        {!! Form::textarea('field-' . $field->name, Input::old('field-' . $field->name, $value), ['class' => 'form-control tinymce']) !!}
+                        {!! Form::textarea('field-' . $field->name, old('field-' . $field->name, $value), ['class' => 'form-control tinymce']) !!}
 
                         @elseif($field->type === 'text')
 
-                        {!! Form::text('field-' . $field->name, Input::old('field-' . $field->name, $value), ['class' => 'form-control']) !!}
+                        {!! Form::text('field-' . $field->name, old('field-' . $field->name, $value), ['class' => 'form-control']) !!}
 
                         @elseif($field->type === 'select')
 
-                        {!! Form::select('field-' . $field->name, $field->options, Input::old('field-' . $field->name, $value), ['class' => 'form-control selectpicker']) !!}
+                        {!! Form::select('field-' . $field->name, $field->options, old('field-' . $field->name, $value), ['class' => 'form-control selectpicker']) !!}
 
                         @endif
                         </div>
@@ -146,11 +146,11 @@
                                     @if($field->type === 'text')
 
                                     {!! Form::label('field-' . $field->name . '-' . $locale->language, trans('menus::admin.menus_item_edit_name'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('field-' . $field->name . '-' . $locale->language, Input::old('field-' . $field->name . '-' . $locale->language, $value), ['class' => 'form-control']) !!}
+                                    {!! Form::text('field-' . $field->name . '-' . $locale->language, old('field-' . $field->name . '-' . $locale->language, $value), ['class' => 'form-control']) !!}
 
                                     @elseif($field->type === 'textarea')
 
-                                    {!! Form::textarea('field-' . $field->name . '-' . $locale->language, Input::old('field-' . $field->name . '-' . $locale->language, $value), ['class' => 'form-control tinymce']) !!}
+                                    {!! Form::textarea('field-' . $field->name . '-' . $locale->language, old('field-' . $field->name . '-' . $locale->language, $value), ['class' => 'form-control tinymce']) !!}
 
                                     @elseif($field->type === 'select')
 

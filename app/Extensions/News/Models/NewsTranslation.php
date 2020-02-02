@@ -2,6 +2,7 @@
 namespace App\Extensions\News\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class NewsTranslation extends Model
 {
@@ -11,8 +12,9 @@ class NewsTranslation extends Model
     
     protected $guarded = ['_token', '_method'];
     
-    public function setSlugAttribute($value){
-        $slug = str_slug($value);
+    public function setSlugAttribute($value)
+    {
+        $slug = Str::slug($value);
         $tmp = $slug;
         
         while($check = $this->where('slug', '=', $tmp)->where('id', '!=', (int)$this->id)->where('locale', '=', $this->locale)->get()->first()){
@@ -29,7 +31,8 @@ class NewsTranslation extends Model
         $this->attributes['slug'] = $slug;
     }
     
-    public function news(){
-        return $this->belongsTo(\App\Models\News\News::class, 'news_id', 'id');
+    public function news()
+    {
+        return $this->belongsTo(News::class, 'news_id', 'id');
     }
 }

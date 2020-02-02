@@ -11,14 +11,14 @@ class Slider extends Module
 {
     protected $view = 'page.modules.slider';
     
-    public function logic() {
-        $slides = false;
-        
+    public function logic()
+    {
         $shortcode = $this->params['shortcode'];
-        $slider = SliderModule::where('shortcode', '=', $shortcode)->get()->first();
-        
-        if(!$slider){
-            return ['slides' => $slides];
+        $slider = SliderModule::where('shortcode', $shortcode)->first();
+
+        if(!$slider)
+        {
+            return ['slides' => collect()];
         }
 
         $query = Slide::query();
@@ -30,9 +30,9 @@ class Slider extends Module
         });
         
         $slides = $query->get();
-        
+
         return [
-            'slides' => $slides->count() ? $slides : false
+            'slides' => $slides
         ];
     }
 }

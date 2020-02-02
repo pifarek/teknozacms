@@ -35,11 +35,11 @@
                     <div role="tabpanel" class="tab-pane" id="variable-{{ $locale->language }}">
                         <div class="form-group{!! $errors->has('name-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('name-' . $locale->language, trans('menus::admin.menus_item_add_name'), ['class' => 'control-label']) !!}
-                            {!! Form::text('name-' . $locale->language, Input::old('name-' . $locale->language), ['class' => 'form-control']) !!}
+                            {!! Form::text('name-' . $locale->language, old('name-' . $locale->language), ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group{!! $errors->has('url-' . $locale->language)? ' has-error' : '' !!}">
                             {!! Form::label('url-' . $locale->language, trans('menus::admin.menus_item_add_url'), ['class' => 'control-label']) !!}
-                            {!! Form::text('url-' . $locale->language, Input::old('url-' . $locale->language), ['class' => 'form-control', 'placeholder' => trans('menus::admin.menus_item_add_url_placeholder')]) !!}
+                            {!! Form::text('url-' . $locale->language, old('url-' . $locale->language), ['class' => 'form-control', 'placeholder' => trans('menus::admin.menus_item_add_url_placeholder')]) !!}
                         </div>
                     </div>
                     @endforeach

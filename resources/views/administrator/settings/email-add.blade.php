@@ -37,7 +37,7 @@
                 {!! Form::open(['class' => 'form-floating']) !!}
                     <div class="form-group{!! $errors->has('tag')? ' has-error' : '' !!}">
                         {!! Form::label('tag', trans('admin.settings_emails_add_tag'), ['class' => 'control-label']) !!}
-                        {!! Form::text('tag', Input::old('tag'), ['class' => 'form-control']) !!}
+                        {!! Form::text('tag', old('tag'), ['class' => 'form-control']) !!}
                     </div>
                 
                     <ul class="nav nav-tabs" role="tablist">
@@ -51,11 +51,11 @@
                         <div role="tabpanel" class="tab-pane" id="tab-{{ $locale->language }}">
                             <div class="form-group{!! $errors->has('subject-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('subject-' . $locale->language, trans('admin.settings_emails_add_subject'), ['class' => 'control-label']) !!}
-                                {!! Form::text('subject-' . $locale->language, Input::old('subject-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::text('subject-' . $locale->language, old('subject-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group{!! $errors->has('tag-' . $locale->language)? ' has-error' : '' !!}">
                                 {!! Form::label('content-' . $locale->language, trans('admin.settings_emails_add_content'), ['class' => 'control-label']) !!}
-                                {!! Form::textarea('content-' . $locale->language, Input::old('content-' . $locale->language), ['class' => 'form-control']) !!}
+                                {!! Form::textarea('content-' . $locale->language, old('content-' . $locale->language), ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         @endforeach

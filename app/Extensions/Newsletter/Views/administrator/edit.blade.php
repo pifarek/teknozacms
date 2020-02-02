@@ -30,11 +30,11 @@
                 {{ method_field('PUT') }}
                     <div class="form-group{!! $errors->has('email')? ' has-error' : '' !!}">
                         {!! Form::label('email', trans('newsletter::admin.edit_email'), ['class' => 'control-label']) !!}
-                        {!! Form::text('email', Input::old('email', $newsletter->email), ['class' => 'form-control']) !!}
+                        {!! Form::text('email', old('email', $newsletter->email), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('group')? ' has-error' : '' !!}">
                         {!! Form::label('group', trans('newsletter::admin.edit_group'), ['class' => 'control-label']) !!}
-                        {!! Form::select('group', [0 => trans('newsletter::admin.edit_uncategorized')] + $groups, Input::old('group', $newsletter->group_id), ['class' => 'form-control selectpicker']) !!}
+                        {!! Form::select('group', [0 => trans('newsletter::admin.edit_uncategorized')] + $groups, old('group', $newsletter->group_id), ['class' => 'form-control selectpicker']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.edit_submit') }}</button>

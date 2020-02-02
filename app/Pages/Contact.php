@@ -32,16 +32,16 @@ class Contact extends Main
                     'message' => ['required']
                 ];
                 
-                $validation = \Validator::make(\Input::all(), $rules);
+                $validation = \Validator::make(request()->all(), $rules);
                 if($validation->fails()){
                     return redirect()->back()->withInput()->withErrors($validation->errors());
                 }else{
                     
                     $data = [
                         'ip_addr' => $_SERVER['REMOTE_ADDR'],
-                        'name' => \Input::get('name'),
-                        'email' => \Input::get('email'),
-                        'body' => \Input::get('message'),
+                        'name' => request()->get('name'),
+                        'email' => request()->get('email'),
+                        'body' => request()->get('message'),
                     ];
                     
                     $success = true;

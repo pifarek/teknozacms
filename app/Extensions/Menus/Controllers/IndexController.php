@@ -7,6 +7,7 @@ use App\Extensions\Menus\Models\Menu;
 use App\Extensions\Menus\Models\Item;
 use App\Extensions\Menus\Models\Custom;
 use App\Models\Locale;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -30,22 +31,22 @@ class IndexController extends BaseController
         return view('Menus.Views.administrator.add');
     }
     
-    public function postAdd()
+    public function postAdd(Request $request)
     {
         $rules = [
             'name' => ['required'],
             'code' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
         $menu = new Menu;
-        $menu->name = \Input::get('name');
-        $menu->code = \Input::get('code');
+        $menu->name = $request->get('name');
+        $menu->code = $request->get('code');
         $menu->save();
         
         return redirect('administrator/menus')->with('success', trans('menus::admin.menus_add_success'));
@@ -64,7 +65,7 @@ class IndexController extends BaseController
         return view('Menus.Views.administrator.edit', ['menu' => $menu]);
     }
     
-    public function postEdit($menu_id)
+    public function postEdit(Request $request, $menu_id)
     {
         $menu = Menu::find($menu_id);
         if(!$menu) {
@@ -76,14 +77,14 @@ class IndexController extends BaseController
             'code' => ['required']
         ];
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        $menu->name = \Input::get('name');
-        $menu->code = \Input::get('code');
+        $menu->name = $request->get('name');
+        $menu->code = $request->get('code');
         $menu->save();
         
         return redirect('administrator/menus/edit/' . $menu_id)->with('success', trans('menus::admin.menus_edit_selected_success'));
@@ -134,7 +135,8 @@ class IndexController extends BaseController
         return view('Menus.Views.administrator.item-add', ['menu' => $menu, 'parents' => $parents, 'locales' => Locale::all(), 'pages' => $pages]);
     }
     
-    public function postItemAdd($menu_id){
+    public function postItemAdd(Request $request, $menu_id)
+    {
         $menu = Menu::find($menu_id);
         if(!$menu){
             return redirect('administrator/menus');
@@ -149,7 +151,7 @@ class IndexController extends BaseController
             $rules['name-' . $locale->language] = ['required'];
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
         
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -166,18 +168,18 @@ class IndexController extends BaseController
         // Add a new menu item
         $item = new Item;
         $item->menu_id = $menu_id;
-        $item->parent_id = \Input::get('parent')?: NULL;
-        $item->type = \Input::get('type');
+        $item->parent_id = $request->get('parent')?: NULL;
+        $item->type = $request->get('type');
         $item->order = $order;
         
         foreach(Locale::all() as $locale) {
             \App::setLocale($locale->language);
-            $item->name = \Input::get('name-' . $locale->language);
+            $item->name = $request->get('name-' . $locale->language);
 
-            if(\Input::get('url-' . $locale->language)) {
-                $item->url = \Input::get('url-' . $locale->language);
+            if($request->get('url-' . $locale->language)) {
+                $item->url = $request->get('url-' . $locale->language);
             }else{
-                $item->url = \Input::get('name-' . $locale->language);
+                $item->url = $request->get('name-' . $locale->language);
             }
         }
         $item->save();
@@ -259,14 +261,15 @@ class IndexController extends BaseController
         return $parents;
     }
     
-    public function postItemEdit($menu_id, $item_id){        
+    public function postItemEdit(Request $request, $menu_id, $item_id)
+    {
         $item = Item::find($item_id);
         if(!$item){
             return redirect('administrator/menus');
         }
 
         // Get a page type
-        $type = \Input::get('type');
+        $type = $request->get('type');
 
         // if we are changing page type
         $changingType = ($item->type != $type)? true : false;
@@ -303,7 +306,7 @@ class IndexController extends BaseController
             }
         }
         
-        $validation = \Validator::make(\Input::all(), $rules);
+        $validation = \Validator::make($request->all(), $rules);
 
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
@@ -311,11 +314,11 @@ class IndexController extends BaseController
 
         foreach(Locale::all() as $locale){
             \App::setLocale($locale->language);
-            $item->name = \Input::get('name-' . $locale->language);
-            if(\Input::get('url-' . $locale->language)){
-                $item->url = \Input::get('url-' . $locale->language);
+            $item->name = $request->get('name-' . $locale->language);
+            if($request->get('url-' . $locale->language)){
+                $item->url = $request->get('url-' . $locale->language);
             }else{
-                $item->url = \Input::get('name-' . $locale->language);
+                $item->url = $request->get('name-' . $locale->language);
             }
         }
         
@@ -332,7 +335,7 @@ class IndexController extends BaseController
                             $custom->item_id = $item->id;
                             $custom->locale = $locale->language;
                             $custom->name = $field->name;
-                            $custom->value = \Input::get('field-' . $field->name . '-' . $locale->language);
+                            $custom->value = $request->get('field-' . $field->name . '-' . $locale->language);
                             $custom->save();
                         }
                     }else{
@@ -340,7 +343,7 @@ class IndexController extends BaseController
                         $custom->item_id = $item->id;
                         $custom->locale = NULL;
                         $custom->name = $field->name;
-                        $custom->value = \Input::get('field-' . $field->name);
+                        $custom->value = $request->get('field-' . $field->name);
                         $custom->save();
                     }
                 }
@@ -352,7 +355,7 @@ class IndexController extends BaseController
         }
         
         $item->type = $type;
-        $item->parent_id = \Input::get('parent')?: NULL;
+        $item->parent_id = $request->get('parent')?: NULL;
         $item->save();
         
         // Regenerate the routes

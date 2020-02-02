@@ -25,11 +25,11 @@
                 {!! Form::open(['class' => 'form-floating', 'url' => url('administrator/newsletter')]) !!}
                     <div class="form-group{!! $errors->has('email')? ' has-error' : '' !!}">
                         {!! Form::label('email', trans('newsletter::admin.add_email'), ['class' => 'control-label']) !!}
-                        {!! Form::text('email', Input::old('email'), ['class' => 'form-control']) !!}
+                        {!! Form::text('email', old('email'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group{!! $errors->has('group')? ' has-error' : '' !!}">
                         {!! Form::label('group', trans('newsletter::admin.add_group'), ['class' => 'control-label']) !!}
-                        {!! Form::select('group', [0 => trans('newsletter::admin.add_uncategorized')] + $groups, Input::old('group'), ['class' => 'form-control selectpicker']) !!}
+                        {!! Form::select('group', [0 => trans('newsletter::admin.add_uncategorized')] + $groups, old('group'), ['class' => 'form-control selectpicker']) !!}
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">{{ trans('newsletter::admin.add_submit') }}</button>

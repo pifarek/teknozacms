@@ -2,19 +2,20 @@
 namespace App\Extensions\News\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Vinkla\Translator\Translatable;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
-class News extends Model
+class News extends Model implements TranslatableContract
 {
     use Translatable;
     
     protected $table = 'news';
     
-    protected $translatable = ['title', 'slug', 'content'];
+    protected $translatedAttributes = ['title', 'slug', 'content'];
     
     public function locales()
     {
-        $translations = \App\Extensions\News\Models\NewsTranslation::where('news_id', '=', $this->id)->get();
+        $translations = NewsTranslation::where('news_id', '=', $this->id)->get();
         $locales = [];
         foreach($translations as $translation){
             $locales[] = \App\Models\Locale::where('language', '=', $translation->locale)->get()->first();
@@ -24,12 +25,12 @@ class News extends Model
     
     public function category()
     {
-        return $this->hasOne(\App\Extensions\News\Models\Category::class, 'id', 'category_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
     
     public function album()
     {
-        return $this->hasOne(\App\Extensions\News\Models\Album::class, 'id', 'album_id');
+        return $this->hasOne(Album::class, 'id', 'album_id');
     }
     
     public function delete()
@@ -44,10 +45,5 @@ class News extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
-    }
-    
-    public function translations()
-    {
-        return $this->hasMany(\App\Extensions\News\Models\NewsTranslation::class);
     }
 }
