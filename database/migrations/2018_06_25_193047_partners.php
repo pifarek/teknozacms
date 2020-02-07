@@ -18,8 +18,8 @@ class Partners extends Migration
 
             $table->increments('id');
             $table->text('name');
-            $table->text('url');
-            $table->string('filename', 100);
+            $table->text('url')->nullable();
+            $table->string('filename', 100)->nullable();
             $table->integer('order')->default(0);
         });
     }
