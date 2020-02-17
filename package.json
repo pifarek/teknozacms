@@ -38,6 +38,6 @@
     "morris-js-module": "^1.2.1",
     "popper.js": "^1.12.9",
     "raphael": "^2.2.7",
-    "tinymce": "^4.7.13"
+    "tinymce": "^4.9.7"
   }
 }
