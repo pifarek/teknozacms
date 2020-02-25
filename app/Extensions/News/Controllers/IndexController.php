@@ -94,13 +94,7 @@ class IndexController extends BaseController
         
         // Get categories
         $categories = [];
-        
-        // Check if we will show categories for current user
-        $show_categories = true;
-        if(\Auth::guard('administrator')->user()->group_id && \Auth::guard('administrator')->user()->group->news_category_id){
-            $show_categories = false;
-        }
-        
+
         foreach(Category::all() as $category){
             $categories[$category->id] = $category->name;
         }
@@ -120,7 +114,6 @@ class IndexController extends BaseController
             'locales' => Locale::all(),
             'categories' => $categories,
             'albums' => $albums,
-            'show_categories' => $show_categories,
             'multimediaExtensionEnabled' => $multimediaExtensionEnabled
         ]);
     }
@@ -153,12 +146,8 @@ class IndexController extends BaseController
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         
-        if(\Auth::user()->group_id && \Auth::user()->group->news_category_id){
-            $news->category_id = \Auth::user()->group->news_category_id;
-        }else{
-            $news->category_id = $request->get('category')?: NULL;
-        }
-        
+        $news->category_id = $request->get('category')?: NULL;
+
         $news->translations()->delete();
         
         foreach($locales as $locale) {
