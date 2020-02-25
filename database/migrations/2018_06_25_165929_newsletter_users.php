@@ -16,6 +16,7 @@ class NewsletterUsers extends Migration
         Schema::create('newsletter_users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
+            $table->increments('id');
             $table->string('email')->unique();
             $table->text('name')->nullable();
             $table->text('surname')->nullable();
