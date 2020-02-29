@@ -158,7 +158,8 @@ class Item extends Model implements TranslatableContract
             // get the item url
             $translation = $item->translations()->where('locale', $locale)->first();
             if($translation) {
-                $params[] = $translation->url;
+                // Add param and make it lowercase
+                $params[] = strtolower($translation->url);
             }
         }
         $route = implode('/', $params);
