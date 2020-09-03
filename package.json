@@ -29,7 +29,7 @@
     "blueimp-file-upload": "^9.22.0",
     "bootbox": "^4.4.0",
     "bootstrap": "^4.1.1",
-    "bootstrap-select": "^1.13.1",
+    "bootstrap-select": "^1.13.6",
     "bootstrap-sweetalert": "^1.0.1",
     "jquery": "^3.3.1",
     "jquery-datetimepicker": "^2.5.20",
